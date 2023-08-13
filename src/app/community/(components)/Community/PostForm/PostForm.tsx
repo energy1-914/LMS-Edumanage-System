@@ -19,6 +19,7 @@ import { useAppSelector } from "@/redux/store";
 import CATEGORY_DATA from "@/constants/category";
 import { Avatar } from "sfac-designkit-react";
 import { ToastProps } from "sfac-designkit-react/dist/Toast";
+import getFileNameFromURL from "@/utils/getFileNameFromURL";
 
 type PostFormProps = {
   onClose: () => void;
@@ -134,15 +135,10 @@ export default function PostForm({
       if (imageData && !isExistsImageData) {
         setPostedThumbnailImages(postedData.thumbnailImages);
         imageData.map(item => {
-          const urlObject = new URL(item.url);
-          const pathParts = urlObject.pathname.split("/");
-          const fileRoot = pathParts[pathParts.length - 1].replaceAll(
-            "%2F",
-            "/",
-          );
+          const decodedFileRoot = getFileNameFromURL(item.url);
           setSelectedImages(prev => [
             ...prev,
-            { url: item.url, status: "existing", root: fileRoot },
+            { url: item.url, status: "existing", root: decodedFileRoot },
           ]);
         });
       }
