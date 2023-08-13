@@ -19,8 +19,8 @@ interface NestedId {
 }
 
 interface CommentInputProps {
-  postData: Post;
-  userData: DocumentData;
+  postData: Post | undefined;
+  userData: DocumentData | undefined;
   postId: string;
   updateId: DocumentData | undefined;
   nestedId: NestedId | undefined;
@@ -60,7 +60,7 @@ export default function CommentInput({
             parentId: nestedId.parentId,
             content: `@${nestedId.tagId}|${newComment.content}`,
             createdAt: now,
-            userId: userData.userRef,
+            userId: userData?.userRef,
           },
         });
       } else {
@@ -69,7 +69,7 @@ export default function CommentInput({
             parentId: postId,
             content: newComment.content,
             createdAt: now,
-            userId: userData.userRef,
+            userId: userData?.userRef,
           },
         });
       }
