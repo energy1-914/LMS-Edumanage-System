@@ -11,7 +11,7 @@ import { useToast } from "@/hooks/useToast";
 import { Toast } from "sfac-designkit-react";
 
 export default function Layout() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false);
   const [isCommunityModalOpen, setIsCommunityModalOpen] = useState(false);
   const postInfo = useAppSelector(state => state.postInfo);
   const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ export default function Layout() {
     // console.log(postInfo);
     if (postInfo.postId) {
       if (postInfo.type === "update") {
-        setIsModalOpen(!isModalOpen);
+        setIsPostModalOpen(!isPostModalOpen);
         // console.log("update");
       } else {
         // console.log("detail");
@@ -36,12 +36,12 @@ export default function Layout() {
   };
 
   const onCloseForm = () => {
-    setIsModalOpen(false);
+    setIsPostModalOpen(false);
     dispatch(notChoicePost());
   };
 
   const handleInputbarClick = () => {
-    setIsModalOpen(!isModalOpen);
+    setIsPostModalOpen(!isPostModalOpen);
   };
 
   const { toastProps, setToastProps } = useToast();
@@ -51,7 +51,7 @@ export default function Layout() {
       <div className="flex  justify-center items-center ">
         <CommunityList />
       </div>
-      {isModalOpen && (
+      {isPostModalOpen && (
         <ModalWrapper
           modalTitle={postInfo.postId === "" ? "글 남기기" : "수정하기"}
           onCloseModal={onCloseForm}
