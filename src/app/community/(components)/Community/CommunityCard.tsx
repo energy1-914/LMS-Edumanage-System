@@ -138,16 +138,16 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
         <div className="mb-[10px] flex w-full h-[135px]">
           <div className="flex flex-col items-start w-full">
             <h3 className="text-base font-bold mb-[10px]">{title}</h3>
-            <p className="text-sm font-normal text-grayscale-60 mb-[10px] text-left line-clamp-3">
-              {content.split("\n").map(text => {
+            <div className="text-sm font-normal text-grayscale-60 mb-[10px] text-left line-clamp-3">
+              {content.split("\n").map((text,index) => {
                 return (
-                  <div>
+                  <p key={index}>
                     {text}
                     <br />
-                  </div>
+                  </p>
                 );
               })}
-            </p>
+            </div>
             <div>
               <div>
                 {tags?.map((tag, idx) => (

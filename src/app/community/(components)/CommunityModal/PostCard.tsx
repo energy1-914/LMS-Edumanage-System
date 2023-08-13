@@ -45,9 +45,9 @@ export default function PostCard({
       <h2 className="text-base font-bold my-2 ">{postData?.title}</h2>
       <div>
         <div className="mb-3 w-[710px]">
-          {postData?.content.split("\n").map(text => {
+          {postData?.content.split("\n").map((text, index) => {
             return (
-              <div>
+              <div key={index}>
                 {text}
                 <br />
               </div>
