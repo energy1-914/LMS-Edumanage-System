@@ -140,13 +140,13 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
             <h3 className="text-base font-bold mb-[10px]">{title}</h3>
             <p className="text-sm font-normal text-grayscale-60 mb-[10px] text-left line-clamp-3">
               {content.split("\n").map(text => {
-            return (
-              <div>
-                {text}
-                <br />
-              </div>
-            );
-          })}
+                return (
+                  <div>
+                    {text}
+                    <br />
+                  </div>
+                );
+              })}
             </p>
             <div>
               <div>

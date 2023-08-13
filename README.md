@@ -5,12 +5,10 @@
   <a href="https://www.npmjs.com/package/sfac-designkit-react"><img src="https://img.shields.io/badge/styled--components-DB7093?logo=styledcomponents&logoColor=fff"/></a>
 </div>
 
-
 <br/>
 <br/>
 
 <br/>
-
 
 # 🔗 배포 URL
 
@@ -20,15 +18,16 @@
 
 **이메일 로그인 테스트 계정**
 
-|  | 관리자 | 수강생 |
-| --- | --- | --- |
-| ID | test@test.com | test4@test.com |
-| PW | test1234 | test1234 |
+|     | 관리자        | 수강생         |
+| --- | ------------- | -------------- |
+| ID  | test@test.com | test4@test.com |
+| PW  | test1234      | test1234       |
 
 <br/>
 <br/>
 
 # 🛠️ 기술 스택
+
 <br/>
 
 <div align="middle">
@@ -42,6 +41,7 @@
 <br/>
 
 # 💻 프로젝트 소개
+
 ## LMS 사이트 제작
 
 이 프로젝트는 LMS 사이트 제작으로 총 5개의 분류를 각각의 한팀씩 맡아 제작하여 최종적으로 5개의 결과물을 하나로 합치는 방식으로 진행 하였습니다.
@@ -64,7 +64,7 @@
 
 <aside>
 
-### 📖 LMS란? 
+### 📖 LMS란?
 
 학습 관리 시스템은 조직에 학습 프로세스의 모든 측면에 대한 프레임워크를 제공하는 소프 트웨어 애플리케이션입니다. 우수한 LMS 시스템은 AI와 스마트 기술을 사용하고, 다른 중요 HR 및 엔터프라이즈
 관리 시스템과의 클라우드 통합을 지원합니다. LMS는 모든 학습 및 교육 컨텐츠를 저장, 제공하고 추적합니다.
@@ -98,10 +98,9 @@ https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/3d0c8
 
 - 디스코드나 슬랙, zep, VS Code 라이브 셰어 등 협업 툴들을 사용하여서 많이 모여서 작업을 진행 하였습니다.
 
-
-
 - 슬랙이나 zep 같은 경우는 3팀 뿐만 아니라 이 프로젝트에 참여하는 모든 팀이 모여야 하는 경우 공지를 하거나 모여서 회의를 할 때 사용하였습니다.
-- 한달 안에 사이트의 모든 기능을 제작하기 위해서는 3팀이 공용 컴포넌트를 제작 해야만 했습니다. 똑같은 기능을 하는 코드를 굳이 여러번 만들지 않도록 하여 시간을 아꼈습니다. 
+- 한달 안에 사이트의 모든 기능을 제작하기 위해서는 3팀이 공용 컴포넌트를 제작 해야만 했습니다. 똑같은 기능을 하는 코드를 굳이 여러번 만들지 않도록 하여 시간을 아꼈습니다.
+
   ```
   - 10팀 - 로그인 / 로그아웃 / 헤더 / 푸터 / 이미지 업로더 기능
   - 4팀 - 파일 드래그 앤 드롭
@@ -115,9 +114,10 @@ https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/3d0c8
 <br/>
 
 # 📌 기능 소개
+
 <br/>
 
-## 👀 미리 보기 
+## 👀 미리 보기
 
 #### 🏫 강의실/강의장 페이지
 
@@ -144,7 +144,9 @@ https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/3d0c8
 <br/>
 
 ## 📱 기능 상세
+
 ### 클래스룸 수강시스템 제작
+
 > 마스터가 클래스 콘텐츠(유뷰트, S3링크, 일반링크) 등을 업로드하고 수강생의 수강률 혹은 학습진행도를 기록하는 시스템 개발
 
 <div align="center">
@@ -163,8 +165,9 @@ https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/3d0c8
 <br/>
 
 ### 과제제출/평가시스템 제작
+
 > 멘토와 수강생의 과제공유 솔루션으로, 멘토의 과제 생성 기능과 <br/>수강생의 과제 제출 기능 구현을 통한 양방향 과제제출/평가시스템 개발
-> 
+
 <div align="center">
 <img width=400, src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/33b2fd27-d334-4e68-888b-4603ba511fb8"/>
 <img width=400, src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/0a8db8cf-81e5-4fa8-a542-ea4f2e3568ba"/>
@@ -181,6 +184,7 @@ https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/3d0c8
 <br/>
 
 ### 커뮤니티 시스템 제작
+
 > 멘토와 수강생들 사이 질문과 자유 대화, 답글 등이 가능한 원스크롤 피드 방식의 커뮤니티 시스템 개발
 
 <div align="center">
@@ -198,16 +202,13 @@ https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/3d0c8
 
 <br/>
 
-
-
 <div align="left">
-
 
 </div>
 
 ## 📂 폴더구조
 
-``` 
+```
 📦sfac-lms-team-a
  ┣ 📂public
  ┃ ┗ 📂images
@@ -236,6 +237,7 @@ https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/3d0c8
  ┃ ┣ 📂types
  ┃ ┣ 📂utils
 ```
+
 <br/>
 
 ## 🗄️DB 설계
@@ -243,7 +245,7 @@ https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/3d0c8
 <img width=700 src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/0859f362-a0e4-4fdf-a988-c628d4d58df0"/>
 
 - 각 팀별 DB 담당자를 뽑아 모든 팀이 함께 모여 DB를 설계했습니다.
-> https://app.eraser.io/workspace/kGgQYva1zAO0XZUtDvDc
+  > https://app.eraser.io/workspace/kGgQYva1zAO0XZUtDvDc
 
 <div align="center">
 
@@ -253,7 +255,7 @@ https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/3d0c8
 
 <br/>
 
-# 🙌🏻  팀 소개
+# 🙌🏻 팀 소개
 
 #### 📍 커뮤니티 & 마이페이지 팀
 
@@ -263,25 +265,24 @@ https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/3d0c8
 |:-:|:-:|:-:|:-:|
 |<img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/95c943ce-da36-44e0-9f38-06d62cfdb4b5">|<img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/0af966de-5896-4667-b3af-a1c2c4fa7c5b">|<img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/e14e75fc-fe80-44cb-aa78-154bdf5aa079">|<img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/3e8b8225-b576-4195-bd70-192c3dc34f0c">|
 
-
-
 </div>
 
 #### 📍 강의실 팀
 
 <div>
 
-|[정진](https://github.com/TypingOK)|[김민지](https://github.com/minzyee)|[전하준](https://github.com/Majesty-jun)|
-|:-:|:-:|:-:|
-|<img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/44db490c-3e03-4831-9d60-f88a3a7fe3d6">|<img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/914c622f-10c8-422e-9f10-c2c4c4f358d5">|<img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/9d425fce-1fdd-4901-bf16-e4b7afbc4d87">|
+|                                                  [정진](https://github.com/TypingOK)                                                  |                                                 [김민지](https://github.com/minzyee)                                                  |                                               [전하준](https://github.com/Majesty-jun)                                                |
+| :-----------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: |
+| <img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/44db490c-3e03-4831-9d60-f88a3a7fe3d6"> | <img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/914c622f-10c8-422e-9f10-c2c4c4f358d5"> | <img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/9d425fce-1fdd-4901-bf16-e4b7afbc4d87"> |
+
 </div>
 
 #### 📍 과제방 팀
 
 <div>
 
-|[정혜선](https://github.com/seonnn)|[안범](https://github.com/mibu119)|[강정구](https://github.com/jgkang9402)|
-|:-:|:-:|:-:|
-|<img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/6eea1dd7-8841-46dd-8dea-f0034c4caddb">|<img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/5cd87229-6dff-4c04-a460-9f5272ba9f1a">|<img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/0d52a23c-0cf1-4632-b26c-4835c594d668">|
+|                                                  [정혜선](https://github.com/seonnn)                                                  |                                                  [안범](https://github.com/mibu119)                                                   |                                                [강정구](https://github.com/jgkang9402)                                                |
+| :-----------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: |
+| <img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/6eea1dd7-8841-46dd-8dea-f0034c4caddb"> | <img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/5cd87229-6dff-4c04-a460-9f5272ba9f1a"> | <img width=120 src="https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/0d52a23c-0cf1-4632-b26c-4835c594d668"> |
 
 </div>

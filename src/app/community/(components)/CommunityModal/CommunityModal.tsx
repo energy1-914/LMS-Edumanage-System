@@ -33,8 +33,6 @@ export default function CommunityModal() {
   const [commentIds, setCommentIds] = useState<string[]>([]);
   const [imageIds, setImageIds] = useState<string[]>([]);
 
-  // Fetch the comment IDs and set them to the state when commentData is available
-
   const handleModalOn = (e: React.MouseEvent<HTMLButtonElement>) => {
     setSelectedImg(e.currentTarget.value);
     setIsImageModalOn(prev => !prev);
@@ -109,10 +107,6 @@ export default function CommunityModal() {
     imageLoading
   ) {
     return <LoadingSpinner />;
-  }
-
-  if (postError || nestedError || userError || commentError || imageError) {
-    return <span>Error: {(postFetchError as Error).message}</span>;
   }
 
   return (
