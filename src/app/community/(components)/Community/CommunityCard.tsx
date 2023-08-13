@@ -6,7 +6,6 @@ import ModalWrapper from "@/components/ModalWrapper";
 import useDeletePost from "@/hooks/reactQuery/community/useDeletePost";
 import { useFetchThumbnail } from "@/hooks/reactQuery/community/useFetchThumbnail";
 import { useCommentCount } from "@/hooks/reactQuery/comment/useCommentCount";
-import useGetProfileImage from "@/hooks/reactQuery/community/useGetProfileImage";
 import { choicePost } from "@redux/postSlice";
 import { useAppDispatch } from "@redux/store";
 import { auth } from "@/utils/firebase";
@@ -38,7 +37,6 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
   const dispatch = useAppDispatch();
 
   const handleChoicePost = () => {
-    // dispatch an action to update the postId in the Redux store
     dispatch(choicePost({ postId: id, type: "detail" }));
   };
   // 썸네일 이미지 url fetching
@@ -141,7 +139,14 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
           <div className="flex flex-col items-start w-full">
             <h3 className="text-base font-bold mb-[10px]">{title}</h3>
             <p className="text-sm font-normal text-grayscale-60 mb-[10px] text-left line-clamp-3">
-              {content}
+              {content.split("\n").map(text => {
+            return (
+              <div>
+                {text}
+                <br />
+              </div>
+            );
+          })}
             </p>
             <div>
               <div>
