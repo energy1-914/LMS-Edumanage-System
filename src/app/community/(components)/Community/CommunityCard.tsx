@@ -7,41 +7,37 @@ import useDeletePost from "@/hooks/reactQuery/community/useDeletePost";
 import { useFetchThumbnail } from "@/hooks/reactQuery/community/useFetchThumbnail";
 import { useCommentCount } from "@/hooks/reactQuery/comment/useCommentCount";
 import { choicePost } from "@redux/postSlice";
-import { useAppDispatch } from "@redux/store";
+import { useAppDispatch, useAppSelector } from "@redux/store";
 import { auth } from "@/utils/firebase";
-import { Post } from "@/types/firebase.types";
 import deleteStorageImages from "@/utils/deleteStorageImages";
 import { Avatar } from "sfac-designkit-react";
 import timestampToDate from "@/utils/timestampToDate";
 import { ToastProps } from "sfac-designkit-react/dist/Toast";
+import useGetSelectedPost from "@/hooks/reactQuery/community/useGetSelectedPost";
 
-interface CommunityCardProps extends Post {
+interface CommunityCardProps {
+  id: string;
   onToast: (toastProps: ToastProps) => void;
 }
 
-const CommunityCard: React.FC<CommunityCardProps> = ({
-  user,
-  userId,
-  id,
-  title,
-  category,
-  content,
-  postImages,
-  thumbnailImages,
-  tags,
-  createdAt,
-  onToast,
-}) => {
+const CommunityCard: React.FC<CommunityCardProps> = ({ id, onToast }) => {
+  const userId = useAppSelector(state => state.userInfo.id);
   const currentUserId = auth.currentUser?.uid;
-  const isAuthor = userId.id === currentUserId;
+  const isAuthor = userId === currentUserId;
   const dispatch = useAppDispatch();
+  const {
+    data: postData,
+    isLoading: postLoading,
+    isError: postError,
+    error: postFetchError,
+  } = useGetSelectedPost(id);
 
   const handleChoicePost = () => {
     dispatch(choicePost({ postId: id, type: "detail" }));
   };
-  // 썸네일 이미지 url fetching
-  const { data: thumbnailImageUrl } = useFetchThumbnail(thumbnailImages);
-  // 프로필 이미지
+  const { data: thumbnailImageUrl } = useFetchThumbnail(
+    postData?.thumbnailImages,
+  );
 
   // 댓글의 개수
   const { data: commentCount } = useCommentCount(id);
@@ -56,7 +52,10 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
   const deleteMutation = useDeletePost();
   const handleDeletePost = () => {
     // 삭제하기 위해서 배열에 이미지, 썸네일을 같이 담는다.
-    const pathsToDelete = [...postImages, ...thumbnailImages];
+    const pathsToDelete = [
+      ...(postData?.postImages || []),
+      ...(postData?.thumbnailImages || []),
+    ];
 
     // 함수 호출해서 이미지 삭제
     deleteStorageImages(pathsToDelete);
@@ -76,26 +75,34 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
   const handleUpdateButton = () => {
     dispatch(choicePost({ postId: id, type: "update" }));
   };
-
+  const postImageLength = postData?.postImages?.length || 0;
   return (
     <div className="flex flex-col h-[240px] rounded-[4px] border-[1px] border-grayscale-5 p-[20px] mb-[10px] z-1">
       <div className="w-full flex justify-between items-center mb-[10px]">
         <div className="flex justify-between items-center">
           <Avatar
-            src={user?.profileImage ?? "/images/avatar.svg"}
+            src={postData?.user?.profileImage ?? "/images/avatar.svg"}
             alt="프로필"
             size={34}
             ring={false}
             className="rounded-[50%] object-cover object-center h-[34px] mr-2"
           />
           <span className="text-xs text-primary-80 font-bold">
-            {category === "익명피드백" ? "익명" : user?.username}
+            {postData?.category === "익명피드백"
+              ? "익명"
+              : postData?.user?.username}
           </span>
           <span className="text-xs text-grayscale-60 font-medium mx-1">
-            • {user?.role} •
+            • {postData?.user?.role} •
           </span>
           <span className="text-xs text-grayscale-60 font-medium">
-            {timestampToDate(createdAt).replaceAll(".", "/")}
+            {postData &&
+              (postData.createdAt.seconds === postData?.updatedAt.seconds
+                ? timestampToDate(postData.createdAt).replaceAll(".", "/")
+                : `${timestampToDate(postData.updatedAt).replaceAll(
+                    ".",
+                    "/",
+                  )} 수정`)}
           </span>
         </div>
         {isAuthor && (
@@ -137,22 +144,20 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
       <button className="flex flex-col" onClick={handleChoicePost}>
         <div className="mb-[10px] flex w-full h-[135px]">
           <div className="flex flex-col items-start w-full">
-            <h3 className="text-base font-bold mb-[10px]">{title}</h3>
+            <h3 className="text-base font-bold mb-[10px]">{postData?.title}</h3>
             <div className="text-sm font-normal text-grayscale-60 mb-[10px] text-left line-clamp-3">
-              {content.split("\n").map((text,index) => {
-                return (
-                  <p key={index}>
-                    {text}
-                    <br />
-                  </p>
-                );
-              })}
+              {postData?.content.split("\n").map((text, index) => (
+                <p key={index}>
+                  {text}
+                  <br />
+                </p>
+              ))}
             </div>
             <div>
               <div>
-                {tags?.map((tag, idx) => (
+                {postData?.tags?.map(tag => (
                   <span
-                    key={idx}
+                    key={tag}
                     className="
                     bg-grayscale-5
                     text-grayscale-60
@@ -174,14 +179,14 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
                 className="rounded-[10px] object-cover object-center w-[120px] h-[120px]"
                 priority
               />
-              {postImages.length > 1 && (
+              {postImageLength > 1 && (
                 <span
                   className="
                 rounded-[50px] bg-primary-5 text-primary-60
                 text-[10px] font-bold px-[5px] absolute top-[10px] right-[0px]
                 "
                 >
-                  + {postImages ? postImages.length - 1 : 0}
+                  + {postImageLength - 1}
                 </span>
               )}
             </div>

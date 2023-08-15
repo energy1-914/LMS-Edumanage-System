@@ -55,19 +55,8 @@ const CommunityList = () => {
             ?.flatMap(page => page.posts)
             ?.map(data => (
               <CommunityCard
-                id={data.id}
-                userId={data.userId}
-                category={data.category}
-                parentId={data.parentId}
                 key={data.id}
-                user={data.user}
-                createdAt={data.createdAt}
-                updatedAt={data.updatedAt}
-                postImages={data.postImages}
-                title={data.title}
-                content={data.content}
-                thumbnailImages={data.thumbnailImages}
-                tags={data.tags}
+                id={data.id}
                 onToast={setToastProps}
               />
             ))
