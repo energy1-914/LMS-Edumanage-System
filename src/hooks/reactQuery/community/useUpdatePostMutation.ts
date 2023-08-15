@@ -35,16 +35,6 @@ export const useUpdatePostMutation = (options: any) => {
   const queryClient = useQueryClient();
 
   return useMutation(updatePost, {
-    // onMutate: (newData) => {
-    //   // 백업본 저장
-    //   const previousData = queryClient.getQueryData('data')
-
-    //   // Optimistic update
-    //   queryClient.setQueryData('data', newData)
-
-    //   // 롤백 함수 반환
-    //   return () => queryClient.setQueryData('data', previousData)
-    // },
     onSuccess: () => {
       options.onSuccess();
       queryClient.invalidateQueries(["posts"]);

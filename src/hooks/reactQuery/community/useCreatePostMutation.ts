@@ -20,7 +20,7 @@ export const createPost = async ({ data, userRef }: CreatePostProps) => {
     thumbnailImages: data.thumbnailImages,
     tags: data.tags,
     createdAt: data.createdAt,
-    updatedAt: data.updatedAt
+    updatedAt: data.updatedAt,
   });
 };
 

@@ -3,17 +3,17 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import ModalWrapper from "@/components/ModalWrapper";
-import useDeletePost from "@/hooks/reactQuery/community/useDeletePost";
 import { useFetchThumbnail } from "@/hooks/reactQuery/community/useFetchThumbnail";
 import { useCommentCount } from "@/hooks/reactQuery/comment/useCommentCount";
+import useGetSelectedPost from "@/hooks/reactQuery/community/useGetSelectedPost";
+import useDeletePost from "@/hooks/reactQuery/community/useDeletePost";
 import { choicePost } from "@redux/postSlice";
 import { useAppDispatch, useAppSelector } from "@redux/store";
 import { auth } from "@/utils/firebase";
 import deleteStorageImages from "@/utils/deleteStorageImages";
-import { Avatar } from "sfac-designkit-react";
 import timestampToDate from "@/utils/timestampToDate";
+import { Avatar } from "sfac-designkit-react";
 import { ToastProps } from "sfac-designkit-react/dist/Toast";
-import useGetSelectedPost from "@/hooks/reactQuery/community/useGetSelectedPost";
 
 interface CommunityCardProps {
   id: string;

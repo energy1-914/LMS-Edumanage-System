@@ -7,10 +7,10 @@
 
 <br/>
 
-
 <br/>
 
 ---
+
 <br/>
 
 [🚀 회고록 바로가기](https://www.notion.so/LMS-401f6a1172a046e596963a792dccabf3)
@@ -118,7 +118,6 @@ https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/3d0c8
 <br/>
 <br/>
 <br/>
-
 
 <div align="left">
 

@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import LoadingSpinner from "@/components/Loading/Loading";
 import { useAppSelector, useAppDispatch } from "@/redux/store";
 import { logoutUser } from "@/redux/userSlice";
 import useGetUserQuery from "@/hooks/reactQuery/navbar/useGetUserQuery";

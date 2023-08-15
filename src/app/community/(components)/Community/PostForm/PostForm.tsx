@@ -234,7 +234,7 @@ export default function PostForm({
       updateMutate({ data, postId });
     } else {
       data.createdAt = currentTime;
-      data.updatedAt =  currentTime;
+      data.updatedAt = currentTime;
       postMutate({ data, userRef });
     }
   });
