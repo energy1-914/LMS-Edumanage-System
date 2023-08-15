@@ -1,5 +1,4 @@
 import { Post, User } from "@/types/firebase.types";
-
 import {
   getDoc,
   getDocs,
@@ -28,31 +27,29 @@ const getSelectedPost = async (
   startAt: any = null,
 ): Promise<GetPostsResult> => {
   // limit 메서드를 활용해서 문서의 개수를 한 번에 몇 개 가져올 것인지 설정.
-  let q = category
+  let query = category
     ? fireStoreQuery(
         collection(db, "posts"),
         where("category", "==", category),
+        // orderBy("updatedAt","desc"),
         orderBy("createdAt", "desc"),
         limit(PAGE_SIZE),
       )
     : fireStoreQuery(
         collection(db, "posts"),
         where("parentId", "==", ""),
+        // orderBy("updatedAt","desc"),
         orderBy("createdAt", "desc"),
         limit(PAGE_SIZE),
       );
 
   if (startAt) {
     // 마지막 문서 이후에 값을 가져온다.
-    q = fireStoreQuery(q, startAfter(startAt));
+    query = fireStoreQuery(query, startAfter(startAt));
   }
 
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach(doc => {
-    // doc.data() is never undefined for query doc snapshots
-    // console.log(doc.id, " => ", doc.data());
-  });
-
+  const querySnapshot = await getDocs(query);
+  
   // 다음페이지를 위한 정보와 현재 페이지에 대한 게시물 정보를 모두 리턴한다.
   // next는 다음 페이지를 로드하기 위한 시점(즉, 현재 페이지의 마지막 게시물)이다.
   return {
@@ -78,7 +75,6 @@ const getSelectedPost = async (
 export default function useGetSelectedCategory(category: string) {
   return useInfiniteQuery<GetPostsResult, Error>(
     ["posts", category],
-
     async ({ pageParam = null }) => await getSelectedPost(category, pageParam),
     {
       getNextPageParam: lastPage => lastPage.next,

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import arrow from "/public/images/Arrow.svg";
-import useGetProgressInfoQuery from "@/hooks/reactQuery/useGetProgressQuery";
+import useGetProgressInfoQuery from "@/hooks/reactQuery/mypage/useGetProgressQuery";
 import { useAppSelector } from "@/redux/store";
 
 export default function Progress() {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PostCard from "@/app/community/(components)/CommunityModal/PostCard";
 import CommentCard from "@/app/community/(components)/CommunityModal/CommentCard";
 import LoadingSpinner from "@/components/Loading/Loading";
-import useGetSelectedPost from "@/hooks/reactQuery/useGetSelectedPost";
+import useGetSelectedPost from "@/hooks/reactQuery/community/useGetSelectedPost";
 import useGetPostImage from "@/hooks/reactQuery/community/useGetPostImage";
 import { useAppSelector } from "@/redux/store";
 import { Avatar } from "sfac-designkit-react";

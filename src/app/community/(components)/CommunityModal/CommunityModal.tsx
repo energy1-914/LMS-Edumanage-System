@@ -10,7 +10,7 @@ import CommentCard from "./CommentCard";
 import LoadingSpinner from "@/components/Loading/Loading";
 import useGetUserQuery from "@/hooks/reactQuery/navbar/useGetUserQuery";
 import useFetchUserComment from "@/hooks/reactQuery/comment/useComment";
-import useGetSelectedPost from "@/hooks/reactQuery/useGetSelectedPost";
+import useGetSelectedPost from "@/hooks/reactQuery/community/useGetSelectedPost";
 import useGetPostImage from "@/hooks/reactQuery/community/useGetPostImage";
 import useNestedComment from "@/hooks/reactQuery/comment/useNestedComment";
 import { useAppSelector } from "@/redux/store";

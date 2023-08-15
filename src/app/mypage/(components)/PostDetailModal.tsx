@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import PostCard from "@/app/community/(components)/CommunityModal/PostCard";
-import useGetSelectedPost from "@/hooks/reactQuery/useGetSelectedPost";
+import useGetSelectedPost from "@/hooks/reactQuery/community/useGetSelectedPost";
 import useGetPostImage from "@/hooks/reactQuery/community/useGetPostImage";
 import LoadingSpinner from "@/components/Loading/Loading";
 
