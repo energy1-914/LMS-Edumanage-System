@@ -6,14 +6,17 @@
 </div>
 
 <br/>
-<br/>
+
 
 <br/>
 
-# 🔗 배포 URL
-
-[LMS 학습관리 시스템](https://lms-a.sniperfactory.com/classroom)
+---
 <br/>
+
+[🚀 회고록 바로가기](https://www.notion.so/LMS-401f6a1172a046e596963a792dccabf3)
+
+[🚀 리팩토링 반영 URL 바로가기](https://lms-edumanagement-system.vercel.app/)
+
 <br/>
 
 **이메일 로그인 테스트 계정**
@@ -75,6 +78,9 @@
 ### 📆 프로젝트 기간
 
 2023년 7월 17일 ~ 2023년 8월 11일
+<br/>
+
+2023년 8월 12일 ~ 리팩토링 진행중
 
 <br/>
 <br/>
@@ -113,100 +119,12 @@ https://github.com/sniperfactory-official/sfac-lms-team-a/assets/108319907/3d0c8
 <br/>
 <br/>
 
-# 📌 기능 소개
-
-<br/>
-
-## 👀 미리 보기
-
-#### 🏫 강의실/강의장 페이지
-
-<div align="center">
-<img width=500, src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/72500346/8ba89ed9-94ad-432b-af69-e666e58b767f"/>
-<img width=500, src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/72500346/4a402c39-77f2-493c-a303-ef86f25aa372"/>
-</div>
-
-<br/>
-
-#### 🗂️ 과제 페이지
-
-<div align="center">
-<img width=700, src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/72500346/bae2a83b-e32c-424b-b6e7-615c833f48ec"/>
-</div>
-<br/>
-
-#### 🤸‍♀️ 커뮤니티 페이지
-
-<div align="center">
-<img width=700, src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/72500346/e627d67c-80f9-4781-8844-b58648f6cdeb"/>
-</div>
-<br/>
-<br/>
-
-## 📱 기능 상세
-
-### 클래스룸 수강시스템 제작
-
-> 마스터가 클래스 콘텐츠(유뷰트, S3링크, 일반링크) 등을 업로드하고 수강생의 수강률 혹은 학습진행도를 기록하는 시스템 개발
-
-<div align="center">
-<img width=400, src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/e2204551-2838-4c6e-9cc6-bcb5d03c607a"/>
-<img width=400, src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/96a424cd-42cb-4496-ac1a-905e877a2eb4"/>
-</div>
-
-<!-- <details>
-<summary>
-<strong>상세내용</strong>
-<p align='left'>
-</p>
-</summary>
-</details> -->
-
-<br/>
-
-### 과제제출/평가시스템 제작
-
-> 멘토와 수강생의 과제공유 솔루션으로, 멘토의 과제 생성 기능과 <br/>수강생의 과제 제출 기능 구현을 통한 양방향 과제제출/평가시스템 개발
-
-<div align="center">
-<img width=400, src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/33b2fd27-d334-4e68-888b-4603ba511fb8"/>
-<img width=400, src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/0a8db8cf-81e5-4fa8-a542-ea4f2e3568ba"/>
-</div>
-
-<!-- <details>
-<summary>
-<strong>상세내용</strong>
-<p align='left'>
-</p>
-</summary>
-</details> -->
-
-<br/>
-
-### 커뮤니티 시스템 제작
-
-> 멘토와 수강생들 사이 질문과 자유 대화, 답글 등이 가능한 원스크롤 피드 방식의 커뮤니티 시스템 개발
-
-<div align="center">
-<img width=400, src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/f5589c8a-9ac1-4314-9c63-74f4202dfdc2"/>
-<img width=400, src="https://github.com/sniperfactory-official/sfac-lms-team-b/assets/52587871/d892e360-2dac-4390-832a-a64a67d6c3b5"/>
-</div>
-
-<!-- <details>
-<summary>
-<strong>상세내용</strong>
-<p align='left'>
-</p>
-</summary>
-</details> -->
-
-<br/>
 
 <div align="left">
 
 </div>
 
-## 📂 폴더구조
+# 📂 폴더구조
 
 ```
 📦sfac-lms-team-a
