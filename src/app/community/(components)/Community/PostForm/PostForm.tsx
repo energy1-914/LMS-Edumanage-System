@@ -8,7 +8,7 @@ import ImageUploader, { ImageObject } from "@/components/common/ImageUploader";
 import LoadingSpinner from "@/components/Loading/Loading";
 import { useCreatePostMutation } from "@/hooks/reactQuery/community/useCreatePostMutation";
 import { useUpdatePostMutation } from "@/hooks/reactQuery/community/useUpdatePostMutation";
-import useGetSelectedPost from "@/hooks/reactQuery/useGetSelectedPost";
+import useGetSelectedPost from "@/hooks/reactQuery/community/useGetSelectedPost";
 import useGetPostImage from "@/hooks/reactQuery/community/useGetPostImage";
 import uploadStorageImages from "@/utils/uploadStorageImages";
 import deleteStorageImages from "@/utils/deleteStorageImages";
@@ -86,6 +86,11 @@ export default function PostForm({
 
   const { mutate: postMutate, isLoading: postLoading } = useCreatePostMutation({
     onSuccess: () => {
+      onToast({
+        type: "Success",
+        text: "게시물 작성이 완료되었습니다.",
+        textSize: "base",
+      });
       cleanup();
     },
   });
@@ -193,7 +198,6 @@ export default function PostForm({
     });
 
     // 수정 시 삭제된 이미지 스토리지에서 제거
-
     const targetRoots = deletedImages
       .filter(item => postedThumbnailImages.includes(item.root))
       .map(item => item.root);
@@ -220,8 +224,8 @@ export default function PostForm({
 
     // 게시글 등록 - 폼데이터를 파이어베이스에 저장한다.
     onClose();
+    const currentTime = getCurrentTime();
     if (postId) {
-      const currentTime = getCurrentTime();
       if (!currentTime) {
         console.error("Unable to get current time");
         return;
@@ -229,7 +233,8 @@ export default function PostForm({
       data.updatedAt = currentTime;
       updateMutate({ data, postId });
     } else {
-      data.createdAt = getCurrentTime();
+      data.createdAt = currentTime;
+      data.updatedAt =  currentTime;
       postMutate({ data, userRef });
     }
   });

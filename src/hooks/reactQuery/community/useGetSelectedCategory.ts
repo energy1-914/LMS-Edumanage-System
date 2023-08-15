@@ -26,20 +26,19 @@ const getSelectedPost = async (
   category: string,
   startAt: any = null,
 ): Promise<GetPostsResult> => {
+
   // limit 메서드를 활용해서 문서의 개수를 한 번에 몇 개 가져올 것인지 설정.
   let query = category
     ? fireStoreQuery(
         collection(db, "posts"),
         where("category", "==", category),
-        // orderBy("updatedAt","desc"),
-        orderBy("createdAt", "desc"),
+        orderBy("updatedAt","desc"),
         limit(PAGE_SIZE),
       )
     : fireStoreQuery(
         collection(db, "posts"),
         where("parentId", "==", ""),
-        // orderBy("updatedAt","desc"),
-        orderBy("createdAt", "desc"),
+        orderBy("updatedAt","desc"),
         limit(PAGE_SIZE),
       );
 
@@ -49,7 +48,7 @@ const getSelectedPost = async (
   }
 
   const querySnapshot = await getDocs(query);
-  
+
   // 다음페이지를 위한 정보와 현재 페이지에 대한 게시물 정보를 모두 리턴한다.
   // next는 다음 페이지를 로드하기 위한 시점(즉, 현재 페이지의 마지막 게시물)이다.
   return {
