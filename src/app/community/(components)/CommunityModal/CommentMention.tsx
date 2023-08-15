@@ -1,4 +1,4 @@
-const CommunityCommentMention = ({ content }: { content: string }) => {
+const CommentMention = ({ content }: { content: string }) => {
   const parts = content.split("|");
   const highlightedContent = parts.map((part, index) => {
     if (part.startsWith("@")) {
@@ -14,4 +14,4 @@ const CommunityCommentMention = ({ content }: { content: string }) => {
   return <>{highlightedContent}</>;
 };
 
-export default CommunityCommentMention;
+export default CommentMention;

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import useDeleteComment from "@/hooks/reactQuery/comment/useDeleteComment";
 import { getTime } from "@/utils/getTime";
-import CommunityCommentMention from "./CommunityCommentMention";
+import CommentMention from "./CommentMention";
 import { DocumentData } from "@firebase/firestore";
 import { Avatar } from "sfac-designkit-react";
 
@@ -102,7 +102,7 @@ export default function CommentCard({
         <div className="flex w-full justify-between mt-1">
           <div className="text-base flex">
             {commentData ? (
-              <CommunityCommentMention content={comment.content} />
+              <CommentMention content={comment.content} />
             ) : (
               <p>{comment.content}</p>
             )}
