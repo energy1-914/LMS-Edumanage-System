@@ -13,15 +13,12 @@ const deletePostFromFirebase = async (postId: string): Promise<void> => {
 
   const comments = await getComment(postId);
 
-  const deleteCommentsPromises = comments.map(
-    async (comment: DocumentData) => {
-      const commentRef = doc(db, "posts", comment.id);
-      return deleteDoc(commentRef);
-    },
-  );
+  const deleteCommentsPromises = comments.map(async (comment: DocumentData) => {
+    const commentRef = doc(db, "posts", comment.id);
+    return deleteDoc(commentRef);
+  });
 
-  await Promise.all(deleteCommentsPromises)
-
+  await Promise.all(deleteCommentsPromises);
 };
 
 const useDeletePost = (): UseMutationResult<void, Error, string> => {
