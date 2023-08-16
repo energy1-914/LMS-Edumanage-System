@@ -21,9 +21,7 @@ interface CommunityCardProps {
 }
 
 const CommunityCard: React.FC<CommunityCardProps> = ({ id, onToast }) => {
-  const userId = useAppSelector(state => state.userInfo.id);
   const currentUserId = auth.currentUser?.uid;
-  const isAuthor = userId === currentUserId;
   const dispatch = useAppDispatch();
   const {
     data: postData,
@@ -31,6 +29,8 @@ const CommunityCard: React.FC<CommunityCardProps> = ({ id, onToast }) => {
     isError: postError,
     error: postFetchError,
   } = useGetSelectedPost(id);
+
+  const isAuthor = postData?.userId.id === currentUserId;
 
   const handleChoicePost = () => {
     dispatch(choicePost({ postId: id, type: "detail" }));
