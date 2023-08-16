@@ -1,4 +1,5 @@
 import { Post, User } from "@/types/firebase.types";
+import { useEffect } from "react";
 import {
   getDoc,
   getDocs,
@@ -10,9 +11,10 @@ import {
   startAfter,
   limit,
   query as fireStoreQuery,
+  onSnapshot,
 } from "@firebase/firestore";
 import { db } from "@/utils/firebase";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 
 // 가져올 문서의 개수
 const PAGE_SIZE = 8;
@@ -71,8 +73,57 @@ const getSelectedPost = async (
 };
 
 export default function useGetSelectedCategory(category: string) {
+  const queryClient = useQueryClient();
+  const queryKey = ["posts", category];
+
+  useEffect(() => {
+    let query = category
+      ? fireStoreQuery(
+          collection(db, "posts"),
+          where("category", "==", category),
+          orderBy("updatedAt", "desc"),
+          limit(PAGE_SIZE),
+        )
+      : fireStoreQuery(
+          collection(db, "posts"),
+          where("parentId", "==", ""),
+          orderBy("updatedAt", "desc"),
+          limit(PAGE_SIZE),
+        );
+
+    const unsubscribe = onSnapshot(query, async snapshot => {
+      const updatedPosts = await Promise.all(
+        snapshot.docs.map(async doc => {
+          const postData = doc.data();
+          let user: User | null = null;
+
+          if (postData.userId instanceof DocumentReference) {
+            const userSnapshot = await getDoc(postData.userId);
+            if (userSnapshot.exists()) {
+              user = userSnapshot.data() as User;
+            }
+          }
+
+          return { id: doc.id, user, ...postData } as Post;
+        }),
+      );
+
+      queryClient.setQueryData(queryKey, {
+        pages: [
+          {
+            posts: updatedPosts,
+            next: snapshot.docs[snapshot.docs.length - 1],
+          },
+        ],
+        pageParams: [null],
+      });
+    });
+
+    return () => unsubscribe();
+  }, [queryClient]);
+
   return useInfiniteQuery<GetPostsResult, Error>(
-    ["posts", category],
+    queryKey,
     async ({ pageParam = null }) => await getSelectedPost(category, pageParam),
     {
       getNextPageParam: lastPage => lastPage.next,
