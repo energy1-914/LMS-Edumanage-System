@@ -1,4 +1,5 @@
-import { getFirestore, doc, deleteDoc } from "firebase/firestore";
+import { getFirestore, doc, deleteDoc, DocumentData } from "firebase/firestore";
+import { getComment } from "../comment/useComment";
 import {
   useMutation,
   UseMutationResult,
@@ -9,6 +10,18 @@ const deletePostFromFirebase = async (postId: string): Promise<void> => {
   const db = getFirestore();
   const postRef = doc(db, "posts", postId);
   await deleteDoc(postRef);
+
+  const comments = await getComment(postId);
+
+  const deleteCommentsPromises = comments.map(
+    async (comment: DocumentData) => {
+      const commentRef = doc(db, "posts", comment.id);
+      return deleteDoc(commentRef);
+    },
+  );
+
+  await Promise.all(deleteCommentsPromises)
+
 };
 
 const useDeletePost = (): UseMutationResult<void, Error, string> => {
@@ -16,8 +29,7 @@ const useDeletePost = (): UseMutationResult<void, Error, string> => {
 
   return useMutation(deletePostFromFirebase, {
     onSuccess: () => {
-      // 필요한 경우, 여기에서 캐시를 업데이트하거나 다른 작업을 수행
-      queryClient.invalidateQueries(["posts"]); // 쿼리를 무효화하여 자동 리프레시
+      queryClient.invalidateQueries(["posts"]);
     },
     onError: (error: Error) => {
       alert("에러가 발생했습니다!");

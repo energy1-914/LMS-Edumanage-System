@@ -13,7 +13,7 @@ import { Post, User } from "@/types/firebase.types";
 import { db } from "@/utils/firebase";
 import { useQuery } from "@tanstack/react-query";
 
-const getComment = async (docId: string) => {
+export const getComment = async (docId: string) => {
   const commentQuery = query(
     collection(db, "posts"),
     where("parentId", "==", docId),
