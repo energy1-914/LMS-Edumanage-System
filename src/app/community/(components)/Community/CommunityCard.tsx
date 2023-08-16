@@ -30,7 +30,7 @@ const CommunityCard: React.FC<CommunityCardProps> = ({ id, onToast }) => {
     error: postFetchError,
   } = useGetSelectedPost(id);
 
-  const isAuthor = postData?.userId.id === currentUserId;
+  const isAuthor = postData?.userId?.id === currentUserId;
 
   const handleChoicePost = () => {
     dispatch(choicePost({ postId: id, type: "detail" }));
@@ -76,6 +76,7 @@ const CommunityCard: React.FC<CommunityCardProps> = ({ id, onToast }) => {
     dispatch(choicePost({ postId: id, type: "update" }));
   };
   const postImageLength = postData?.postImages?.length || 0;
+
   return (
     <div className="flex flex-col h-[240px] rounded-[4px] border-[1px] border-grayscale-5 p-[20px] mb-[10px] z-1">
       <div className="w-full flex justify-between items-center mb-[10px]">
@@ -97,7 +98,7 @@ const CommunityCard: React.FC<CommunityCardProps> = ({ id, onToast }) => {
           </span>
           <span className="text-xs text-grayscale-60 font-medium">
             {postData &&
-              (postData.createdAt.seconds === postData?.updatedAt.seconds
+              (postData?.createdAt?.seconds === postData?.updatedAt?.seconds
                 ? timestampToDate(postData.createdAt).replaceAll(".", "/")
                 : `${timestampToDate(postData.updatedAt).replaceAll(
                     ".",
