@@ -7,7 +7,6 @@ import { auth } from "@/utils/firebase";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import LoadingSpinner from "../Loading/LoadingSpinner";
-import LoginForm from "../LoginForm/LoginForm";
 import LoginLayout from "../common/LoginLayout";
 
 export default function RequireAuth({
@@ -70,9 +69,7 @@ export default function RequireAuth({
   if (showLoginForm) {
     return (
       <>
-        <LoginLayout>
-          <LoginForm />
-        </LoginLayout>
+        <LoginLayout />
       </>
     );
   }
