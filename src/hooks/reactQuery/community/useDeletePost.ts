@@ -1,5 +1,5 @@
 import { getFirestore, doc, deleteDoc, DocumentData } from "firebase/firestore";
-import { getComment } from "../comment/useComment";
+import { getComment } from "../comment/useGetComment";
 import {
   useMutation,
   UseMutationResult,

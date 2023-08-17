@@ -10,6 +10,6 @@ function fetchCommentCount(postId: string) {
   };
 }
 
-export const useCommentCount = (postId: string) => {
+export default function useGetCommentCount(postId: string) {
   return useQuery(["commentCount", postId], fetchCommentCount(postId));
-};
+}

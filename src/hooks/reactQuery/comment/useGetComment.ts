@@ -39,6 +39,6 @@ export const getComment = async (docId: string) => {
   return postComments;
 };
 
-export default function useFetchUserComment(docId: string) {
+export default function useGetComment(docId: string) {
   return useQuery(["comment", docId], async () => await getComment(docId));
 }

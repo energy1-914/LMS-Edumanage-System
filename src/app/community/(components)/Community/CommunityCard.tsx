@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import ModalWrapper from "@/components/ModalWrapper";
 import { useFetchThumbnail } from "@/hooks/reactQuery/community/useFetchThumbnail";
-import { useCommentCount } from "@/hooks/reactQuery/comment/useCommentCount";
+import useGetCommentCount from "@/hooks/reactQuery/comment/useGetCommentCount";
 import useDeletePost from "@/hooks/reactQuery/community/useDeletePost";
 import { choicePost } from "@redux/postSlice";
 import { useAppDispatch } from "@redux/store";
@@ -30,7 +30,7 @@ const CommunityCard: React.FC<CommunityCardProps> = ({ data, onToast }) => {
   const { data: thumbnailImageUrl } = useFetchThumbnail(data.thumbnailImages);
 
   // 댓글의 개수
-  const { data: commentCount } = useCommentCount(data.id);
+  const { data: commentCount } = useGetCommentCount(data.id);
 
   // 게시글에서 삭제 버튼 클릭 시
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);

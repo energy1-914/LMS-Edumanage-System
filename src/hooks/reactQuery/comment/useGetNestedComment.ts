@@ -7,11 +7,9 @@ import {
   getDoc,
   DocumentReference,
 } from "@firebase/firestore";
-import { Post, User } from "@/types/firebase.types";
-
+import { User } from "@/types/firebase.types";
 import { db } from "@/utils/firebase";
-import { useQuery, useQueries, UseQueryResult } from "@tanstack/react-query";
-import { loadGetInitialProps } from "next/dist/shared/lib/utils";
+import { useQueries, UseQueryResult } from "@tanstack/react-query";
 
 const getNestedComment = async (docId: string) => {
   const commentQuery = query(
@@ -23,7 +21,7 @@ const getNestedComment = async (docId: string) => {
 
   let postComments: DocumentData[] = [];
   for (const doc of querySnapshot.docs) {
-    const postData = await doc.data();
+    const postData = doc.data();
 
     let user: User | null = null;
 
@@ -39,7 +37,7 @@ const getNestedComment = async (docId: string) => {
   return postComments;
 };
 
-export default function useFetchUserComments(docIds: string[]) {
+export default function useGetNestedComment(docIds: string[]) {
   const commentQueries = useQueries({
     queries: docIds.map(id => ({
       queryKey: ["comment", id],

@@ -9,10 +9,10 @@ import PostCard from "./PostCard";
 import CommentCard from "./CommentCard";
 import LoadingSpinner from "@/components/Loading/Loading";
 import useGetUserQuery from "@/hooks/reactQuery/navbar/useGetUserQuery";
-import useFetchUserComment from "@/hooks/reactQuery/comment/useComment";
+import useGetComment from "@/hooks/reactQuery/comment/useGetComment";
 import useGetSelectedPost from "@/hooks/reactQuery/community/useGetSelectedPost";
 import useGetPostImage from "@/hooks/reactQuery/community/useGetPostImage";
-import useNestedComment from "@/hooks/reactQuery/comment/useNestedComment";
+import useGetNestedComment from "@/hooks/reactQuery/comment/useGetNestedComment";
 import { useAppSelector } from "@/redux/store";
 import { DocumentData } from "@firebase/firestore";
 
@@ -68,7 +68,7 @@ export default function CommunityModal() {
     isLoading: commentLoading,
     isError: commentError,
     error: commentFetchError,
-  } = useFetchUserComment(postId);
+  } = useGetComment(postId);
 
   useEffect(() => {
     if (postData?.thumbnailImages) {
@@ -89,7 +89,7 @@ export default function CommunityModal() {
     isLoading: nestedCommentLoading,
     isError: nestedError,
     error: nestedFetchError,
-  } = useNestedComment(commentIds);
+  } = useGetNestedComment(commentIds);
 
   // 글 이미지
   const {
