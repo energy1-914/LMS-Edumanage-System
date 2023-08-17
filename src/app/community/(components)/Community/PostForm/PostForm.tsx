@@ -5,7 +5,7 @@ import SelectMenu from "./SelectMenu";
 import PostTags from "./PostTags";
 import Button from "@/components/common/Button";
 import ImageUploader, { ImageObject } from "@/components/common/ImageUploader";
-import LoadingSpinner from "@/components/Loading/Loading";
+import LoadingSpinner from "@/components/Loading/LoadingSpinner";
 import { useCreatePostMutation } from "@/hooks/reactQuery/community/useCreatePostMutation";
 import { useUpdatePostMutation } from "@/hooks/reactQuery/community/useUpdatePostMutation";
 import useGetSelectedPost from "@/hooks/reactQuery/community/useGetSelectedPost";

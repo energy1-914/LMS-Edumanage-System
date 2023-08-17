@@ -6,7 +6,7 @@ import Footer from "@/components/Footer/Footer";
 import { auth } from "@/utils/firebase";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import LoadingSpinner from "../Loading/Loading";
+import LoadingSpinner from "../Loading/LoadingSpinner";
 import LoginForm from "../LoginForm/LoginForm";
 import LoginLayout from "../common/LoginLayout";
 

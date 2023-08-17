@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import LoadingSpinner from "@/components/Loading/Loading";
+import LoadingSpinner from "@/components/Loading/LoadingSpinner";
 import ModalWrapper from "@/components/ModalWrapper";
 import Category from "./Category";
 import AssignmentsDetailModal from "./AssignmentsDetailModal";

@@ -7,7 +7,7 @@ import CommentInput from "./CommentInput";
 import ImageModal from "./ImageModal";
 import PostCard from "./PostCard";
 import CommentCard from "./CommentCard";
-import LoadingSpinner from "@/components/Loading/Loading";
+import LoadingSpinner from "@/components/Loading/LoadingSpinner";
 import useGetUserQuery from "@/hooks/reactQuery/navbar/useGetUserQuery";
 import useGetComment from "@/hooks/reactQuery/comment/useGetComment";
 import useGetSelectedPost from "@/hooks/reactQuery/community/useGetSelectedPost";

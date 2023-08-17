@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import LoadingSpinner from "@/components/Loading/Loading";
+import LoadingSpinner from "@/components/Loading/LoadingSpinner";
 import useGetPostImage from "@/hooks/reactQuery/community/useGetPostImage";
 
 interface ImageModalProps {

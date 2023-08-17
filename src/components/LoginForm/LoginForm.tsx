@@ -4,7 +4,7 @@ import Button from "@/components/common/Button";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useLoginMutation } from "@/hooks/reactQuery/login/useLoginMutation";
-import LoadingSpinner from "@/components/Loading/Loading";
+import LoadingSpinner from "@/components/Loading/LoadingSpinner";
 import { Toast } from "sfac-designkit-react";
 import { useToast } from "@/hooks/useToast";
 

@@ -10,7 +10,7 @@ import { useAppSelector, useAppDispatch } from "@/redux/store";
 import useGetUserQuery from "@/hooks/reactQuery/navbar/useGetUserQuery";
 import { logout } from "@/utils/sign";
 import { useProfileImage } from "@/hooks/reactQuery/mypage/useProfileImage";
-import LoadingSpinner from "@/components/Loading/Loading";
+import LoadingSpinner from "@/components/Loading/LoadingSpinner";
 import { Avatar } from "sfac-designkit-react";
 
 export default function Profile() {

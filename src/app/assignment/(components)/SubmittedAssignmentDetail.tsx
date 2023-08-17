@@ -5,7 +5,7 @@ import { User } from "@/types/firebase.types";
 import { useGetSubmittedAssignment } from "@/hooks/reactQuery/submittedAssignment/useGetSubmittedAssignment";
 import SubmittedAssignmentContent from "./(submittedAssignment)/SubmittedAssignmentContent";
 import useGetFeedbacks from "@/hooks/reactQuery/feedback/useGetFeedbacks";
-import LoadingSpinner from "@/components/Loading/Loading";
+import LoadingSpinner from "@/components/Loading/LoadingSpinner";
 
 const SubmittedAssignmentDetail = ({
   docId,
