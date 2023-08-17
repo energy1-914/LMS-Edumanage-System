@@ -21,11 +21,12 @@ const deletePostFromFirebase = async (postId: string): Promise<void> => {
   await Promise.all(deleteCommentsPromises);
 };
 
-const useDeletePost = (): UseMutationResult<void, Error, string> => {
+const useDeletePost = (options: any): UseMutationResult<void, Error, string> => {
   const queryClient = useQueryClient();
 
   return useMutation(deletePostFromFirebase, {
     onSuccess: () => {
+      options.onSuccess();
       queryClient.invalidateQueries(["posts"]);
     },
     onError: (error: Error) => {

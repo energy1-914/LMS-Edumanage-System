@@ -56,7 +56,7 @@ const CommunityList = () => {
             ?.map(data => (
               <CommunityCard
                 key={data.id}
-                id={data.id}
+                data={data}
                 onToast={setToastProps}
               />
             ))

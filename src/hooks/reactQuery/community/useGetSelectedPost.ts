@@ -4,17 +4,10 @@ import { doc, getDoc, DocumentReference } from "@firebase/firestore";
 import { db } from "@/utils/firebase";
 import { useQuery } from "@tanstack/react-query";
 
-const getPost = async (postId: string): Promise<Post | null> => {
-  if (!postId) {
-    throw new Error("Invalid postId");
-  }
+const getPost = async (postId: string): Promise<Post> => {
   const postRef = doc(db, "posts", postId);
   const postSnap = await getDoc(postRef);
   const postData = postSnap.data();
-  if (!postData) {
-    // throw new Error("Post data not found");
-    return null;
-  }
   let user: User | null = null;
 
   if (postData?.userId instanceof DocumentReference) {

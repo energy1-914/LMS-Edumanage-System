@@ -5,42 +5,33 @@ import Image from "next/image";
 import ModalWrapper from "@/components/ModalWrapper";
 import { useFetchThumbnail } from "@/hooks/reactQuery/community/useFetchThumbnail";
 import { useCommentCount } from "@/hooks/reactQuery/comment/useCommentCount";
-import useGetSelectedPost from "@/hooks/reactQuery/community/useGetSelectedPost";
 import useDeletePost from "@/hooks/reactQuery/community/useDeletePost";
 import { choicePost } from "@redux/postSlice";
-import { useAppDispatch, useAppSelector } from "@redux/store";
+import { useAppDispatch } from "@redux/store";
 import { auth } from "@/utils/firebase";
 import deleteStorageImages from "@/utils/deleteStorageImages";
 import timestampToDate from "@/utils/timestampToDate";
 import { Avatar } from "sfac-designkit-react";
 import { ToastProps } from "sfac-designkit-react/dist/Toast";
+import { DocumentData } from "@firebase/firestore";
 
 interface CommunityCardProps {
-  id: string;
+  data: DocumentData;
   onToast: (toastProps: ToastProps) => void;
 }
 
-const CommunityCard: React.FC<CommunityCardProps> = ({ id, onToast }) => {
+const CommunityCard: React.FC<CommunityCardProps> = ({ data, onToast }) => {
   const currentUserId = auth.currentUser?.uid;
   const dispatch = useAppDispatch();
-  const {
-    data: postData,
-    isLoading: postLoading,
-    isError: postError,
-    error: postFetchError,
-  } = useGetSelectedPost(id);
-
-  const isAuthor = postData?.userId?.id === currentUserId;
+  const isAuthor = data.userId.id === currentUserId;
 
   const handleChoicePost = () => {
-    dispatch(choicePost({ postId: id, type: "detail" }));
+    dispatch(choicePost({ postId: data.id, type: "detail" }));
   };
-  const { data: thumbnailImageUrl } = useFetchThumbnail(
-    postData?.thumbnailImages,
-  );
+  const { data: thumbnailImageUrl } = useFetchThumbnail(data.thumbnailImages);
 
   // 댓글의 개수
-  const { data: commentCount } = useCommentCount(id);
+  const { data: commentCount } = useCommentCount(data.id);
 
   // 게시글에서 삭제 버튼 클릭 시
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -49,58 +40,55 @@ const CommunityCard: React.FC<CommunityCardProps> = ({ id, onToast }) => {
   };
 
   // 모달창에서 삭제 버튼 클릭 시 로직
-  const deleteMutation = useDeletePost();
-  const handleDeletePost = () => {
-    // 삭제하기 위해서 배열에 이미지, 썸네일을 같이 담는다.
-    const pathsToDelete = [
-      ...(postData?.postImages || []),
-      ...(postData?.thumbnailImages || []),
-    ];
-
-    // 함수 호출해서 이미지 삭제
-    deleteStorageImages(pathsToDelete);
-    deleteMutation.mutate(id, {
-      onSuccess: () => {
+  const{ mutate : deleteMutation} = useDeletePost({
+    onSuccess: () => {
         onToast({
           type: "Success",
           text: "게시물이 삭제되었습니다!",
           textSize: "base",
         });
       },
-    });
+  });
+  const handleDeletePost = () => {
+    // 삭제하기 위해서 배열에 이미지, 썸네일을 같이 담는다.
+    const pathsToDelete = [
+      ...(data?.postImages || []),
+      ...(data?.thumbnailImages || []),
+    ];
+    deleteStorageImages(pathsToDelete);
+
+    deleteMutation(data.id);
     setIsDeleteModalOpen(false);
   };
 
   //수정하기 함수
   const handleUpdateButton = () => {
-    dispatch(choicePost({ postId: id, type: "update" }));
+    dispatch(choicePost({ postId: data.id, type: "update" }));
   };
-  const postImageLength = postData?.postImages?.length || 0;
+  const postImageLength = data?.postImages?.length || 0;
 
   return (
     <div className="flex flex-col h-[240px] rounded-[4px] border-[1px] border-grayscale-5 p-[20px] mb-[10px] z-1">
       <div className="w-full flex justify-between items-center mb-[10px]">
         <div className="flex justify-between items-center">
           <Avatar
-            src={postData?.user?.profileImage ?? "/images/avatar.svg"}
+            src={data?.user?.profileImage ?? "/images/avatar.svg"}
             alt="프로필"
             size={34}
             ring={false}
             className="rounded-[50%] object-cover object-center h-[34px] mr-2"
           />
           <span className="text-xs text-primary-80 font-bold">
-            {postData?.category === "익명피드백"
-              ? "익명"
-              : postData?.user?.username}
+            {data?.category === "익명피드백" ? "익명" : data?.user?.username}
           </span>
           <span className="text-xs text-grayscale-60 font-medium mx-1">
-            • {postData?.user?.role} •
+            • {data?.user?.role} •
           </span>
           <span className="text-xs text-grayscale-60 font-medium">
-            {postData &&
-              (postData?.createdAt?.seconds === postData?.updatedAt?.seconds
-                ? timestampToDate(postData.createdAt).replaceAll(".", "/")
-                : `${timestampToDate(postData.updatedAt).replaceAll(
+            {data &&
+              (data?.createdAt?.seconds === data?.updatedAt?.seconds
+                ? timestampToDate(data.createdAt).replaceAll(".", "/")
+                : `${timestampToDate(data.updatedAt).replaceAll(
                     ".",
                     "/",
                   )} 수정`)}
@@ -145,9 +133,9 @@ const CommunityCard: React.FC<CommunityCardProps> = ({ id, onToast }) => {
       <button className="flex flex-col" onClick={handleChoicePost}>
         <div className="mb-[10px] flex w-full h-[135px]">
           <div className="flex flex-col items-start w-full">
-            <h3 className="text-base font-bold mb-[10px]">{postData?.title}</h3>
+            <h3 className="text-base font-bold mb-[10px]">{data?.title}</h3>
             <div className="text-sm font-normal text-grayscale-60 mb-[10px] text-left line-clamp-3">
-              {postData?.content.split("\n").map((text, index) => (
+              {data?.content.split("\n").map((text: string, index: number) => (
                 <p key={index}>
                   {text}
                   <br />
@@ -156,7 +144,7 @@ const CommunityCard: React.FC<CommunityCardProps> = ({ id, onToast }) => {
             </div>
             <div>
               <div>
-                {postData?.tags?.map(tag => (
+                {data?.tags?.map((tag: string) => (
                   <span
                     key={tag}
                     className="
