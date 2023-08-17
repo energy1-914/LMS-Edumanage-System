@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import Inputbar from "./Inputbar";
+import Inputbar from "./(components)/Community/Inputbar";
 import ModalWrapper from "@/components/ModalWrapper";
-import PostForm from "./PostForm/PostForm";
-import CommunityList from "./CommunityList";
-import CommunityModal from "../CommunityModal/CommunityModal";
+import PostForm from "./(components)/Community/PostForm/PostForm";
+import CommunityList from "./(components)/Community/CommunityList";
+import CommunityModal from "./(components)/CommunityModal/CommunityModal";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { notChoicePost } from "@redux/postSlice";
 import { useToast } from "@/hooks/useToast";
@@ -17,13 +17,10 @@ export default function Layout() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // console.log(postInfo);
     if (postInfo.postId) {
       if (postInfo.type === "update") {
         setIsPostModalOpen(!isPostModalOpen);
-        // console.log("update");
       } else {
-        // console.log("detail");
         setIsCommunityModalOpen(true);
       }
     }
