@@ -24,7 +24,6 @@ const CommunityCard: React.FC<CommunityCardProps> = ({ data, onToast }) => {
   const currentUserId = auth.currentUser?.uid;
   const dispatch = useAppDispatch();
   const isAuthor = data.userId.id === currentUserId;
-
   const handleChoicePost = () => {
     dispatch(choicePost({ postId: data.id, type: "detail" }));
   };
@@ -40,14 +39,14 @@ const CommunityCard: React.FC<CommunityCardProps> = ({ data, onToast }) => {
   };
 
   // 모달창에서 삭제 버튼 클릭 시 로직
-  const{ mutate : deleteMutation} = useDeletePost({
+  const { mutate: deleteMutation } = useDeletePost({
     onSuccess: () => {
-        onToast({
-          type: "Success",
-          text: "게시물이 삭제되었습니다!",
-          textSize: "base",
-        });
-      },
+      onToast({
+        type: "Success",
+        text: "게시물이 삭제되었습니다!",
+        textSize: "base",
+      });
+    },
   });
   const handleDeletePost = () => {
     // 삭제하기 위해서 배열에 이미지, 썸네일을 같이 담는다.
