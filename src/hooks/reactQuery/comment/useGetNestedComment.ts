@@ -16,13 +16,11 @@ const getNestedComment = async (docId: string) => {
     collection(db, "posts"),
     where("parentId", "==", docId),
   );
-
   const querySnapshot = await getDocs(commentQuery);
 
   let postComments: DocumentData[] = [];
   for (const doc of querySnapshot.docs) {
     const postData = doc.data();
-
     let user: User | null = null;
 
     if (postData.userId instanceof DocumentReference) {
@@ -47,9 +45,10 @@ export default function useGetNestedComment(docIds: string[]) {
 
   // 모든 유저 댓글 데이터를 하나의 배열로 결합
   const allCommentData = commentQueries
-    .filter(query => query.data !== undefined && query.data !== null)
+    .filter(query => query.data !== undefined && query.data !== null && query.data.length !== 0)
     .map(query => query.data)
-    .flat();
+    .concat()[0]
+    ?.sort((a,b) => {return a.createdAt.seconds - b.createdAt.seconds})
   const isLoading = commentQueries.some(query => query.isLoading);
   const isError = commentQueries.some(query => query.isError);
   const error = commentQueries.find(query => query.error)?.error;
