@@ -42,10 +42,8 @@ const useCreateComment = () => {
       // Optional: 에러 메세지 UI 업데이트 하고 싶은 경우 사용
     },
     onSuccess: (data, variables, context) => {
-      // Optional: 입력 성공시 메세지 UI 업데이트 하고 싶은 경우 사용
       queryClient.invalidateQueries(["comment"]);
-
-      // console.log(data);
+      queryClient.invalidateQueries(["commentCount"]);
     },
   });
   return { mutate, data, error, reset };
