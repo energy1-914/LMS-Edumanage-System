@@ -38,7 +38,7 @@ export default function Navbar() {
     isLoading: lectureLoading,
     isError: lectureError,
     error: lectureFetchError,
-  } = useGetLectureInfoQuery("01ZGWkepm08s3Cgt83bG");
+  } = useGetLectureInfoQuery("747pDBvsl6uHTeR56xHn");
 
   const getTime = (time: Date) => {
     const today = new Date();

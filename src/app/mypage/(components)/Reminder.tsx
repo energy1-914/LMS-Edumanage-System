@@ -24,7 +24,7 @@ const Reminder = () => {
 
   // 일차 가져오기
   const { data: lectureData, isLoading: lectureLoading } =
-    useGetLectureInfoQuery("01ZGWkepm08s3Cgt83bG");
+    useGetLectureInfoQuery("747pDBvsl6uHTeR56xHn");
 
   const getTime = (time: Date) => {
     const today = new Date();
