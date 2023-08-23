@@ -67,7 +67,7 @@ const CommunityCard: React.FC<CommunityCardProps> = ({ data, onToast }) => {
   const postImageLength = data?.postImages?.length || 0;
 
   return (
-    <div className="flex flex-col h-[240px] rounded-[4px] border-[1px] border-grayscale-5 p-[20px] mb-[10px] z-1">
+    <div className="flex flex-col h-[240px] rounded-[10px] border-[1px] border-gray-200 p-[20px] mb-[10px] z-1">
       <div className="w-full flex justify-between items-center mb-[10px]">
         <div className="flex justify-between items-center">
           <Avatar

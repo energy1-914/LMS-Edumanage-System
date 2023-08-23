@@ -53,7 +53,7 @@ export default function Category({
         myData.map(({ id, title, category, content, attachmentFiles }) => (
           <div
             key={id}
-            className="h-[73px] text-base border-solid border border-gray-200 rounded-[10px] px-[12px] py-[16px] my-3 cursor-pointer"
+            className="h-[73px] text-base border-solid border border-gray-200 rounded-[10px] px-3 py-4 my-3 cursor-pointer"
             onClick={() => {
               handleDetailModalClick && handleDetailModalClick(id);
             }}

@@ -29,7 +29,7 @@ const AssignmentsDetailModal = ({
     <div className="w-full">
       <div
         key={targetAssignments.id}
-        className="h-44 text-base border-solid border border-gray-200 rounded-[10px] px-[12px] py-[16px] my-3"
+        className="h-44 text-base border-solid border border-gray-200 rounded-[10px] px-3 py-4 my-3"
       >
         <div className="flex mb-3.5 ">
           <div className="align-middle px-[5px] leading-5 text-[10px] text-center bg-gray-200 rounded mr-[7px] mb-[4px]">
