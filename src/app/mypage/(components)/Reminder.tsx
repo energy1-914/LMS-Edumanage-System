@@ -5,7 +5,6 @@ import useGetLectureInfoQuery from "@/hooks/reactQuery/lecture/useGetLectureInfo
 import { useGetAssignmentsByUser } from "@/hooks/reactQuery/mypage/useGetAssignmentsByUser";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { DocumentReference, Timestamp } from "@firebase/firestore";
 import { useAppSelector } from "@/redux/store";
 import useGetUserQuery from "@/hooks/reactQuery/navbar/useGetUserQuery";
 
