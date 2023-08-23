@@ -6,6 +6,9 @@ import "sfac-designkit-react/style.css";
 export const metadata: Metadata = {
   title: "LMS 학습관리 시스템",
   description: "LMS 학습관리 시스템입니다.",
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({
