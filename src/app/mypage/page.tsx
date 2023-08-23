@@ -1,8 +1,8 @@
 import Reminder from "@/app/mypage/(components)/Reminder";
-import Sidebar from "./(components)/Button";
-import Progress from "./(components)/Progress";
+import Sidebar from "./(components)/Sidebar";
 import Profile from "./(components)/Profile";
 import UserActivityList from "./(components)/UserActivityList";
+import Dashboard from "./(components)/(dashboard)/Dashboard";
 
 export default function MyPage() {
   return (
@@ -14,7 +14,7 @@ export default function MyPage() {
         <div className="flex flex-col  w-9/12 ">
           <Profile />
           <Reminder />
-          <Progress />
+          <Dashboard />
           <UserActivityList />
         </div>
       </div>
