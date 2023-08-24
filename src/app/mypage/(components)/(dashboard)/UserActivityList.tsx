@@ -46,11 +46,8 @@ export default function UserActivityList() {
     setSelectedCommentId(() => id);
   };
   const userId = useAppSelector(state => state.userInfo.id);
-  const {
-    filteredAssignments,
-    filteredPosts,
-    comments,
-  } = useUserActivityData(userId);
+  const { filteredAssignments, filteredPosts, comments } =
+    useUserActivityData(userId);
 
   return (
     <>
