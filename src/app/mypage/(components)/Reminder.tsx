@@ -60,7 +60,7 @@ const Reminder = () => {
   const dDay = calculateDDay(seconds);
 
   return isReminderVisible && assignmentsData?.unsubmitted ? (
-    <div className="h-[117px] border flex-col bg-blue-800 rounded-xl flex justify-between px-[28px] py-[24px] mb-[50px]">
+    <div className="h-[117px] border flex-col bg-blue-800 rounded-xl flex justify-between px-[28px] py-[24px]">
       <div className="flex justify-between">
         <div className="text-primary-5 text-base">
           <span className="font-bold">{userData?.username}</span>
