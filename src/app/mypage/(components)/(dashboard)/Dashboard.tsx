@@ -11,19 +11,10 @@ import LoadingSpinner from "@/components/Loading/LoadingSpinner";
 
 const Dashboard = () => {
   const userId = useAppSelector(state => state.userInfo.id);
-  const {
-    lectureCommentLoading,
-    myPostLoading,
-    assignmentLoading,
-    progressLoading,
-  } = useUserActivityData(userId);
+  const { lectureCommentLoading, myPostLoading, progressLoading } =
+    useUserActivityData(userId);
 
-  if (
-    lectureCommentLoading ||
-    myPostLoading ||
-    assignmentLoading ||
-    progressLoading
-  ) {
+  if (lectureCommentLoading || myPostLoading || progressLoading) {
     return <LoadingSpinner />;
   }
 

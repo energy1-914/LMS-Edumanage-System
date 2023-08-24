@@ -1,15 +1,10 @@
 import useGetMyPosts from "@/hooks/reactQuery/mypage/useGetMyPosts";
-import useGetAssignments from "@/hooks/reactQuery/mypage/useGetAssignments";
 import useGetLectureComments from "@/hooks/reactQuery/mypage/useGetLectureComments";
 import useGetProgressInfoQuery from "@/hooks/reactQuery/mypage/useGetProgressQuery";
+import { useGetAssignmentsByUser } from "@/hooks/reactQuery/mypage/useGetAssignmentsByUser";
 
 export const useUserActivityData = (userId: string) => {
-  const {
-    data: assignmentData,
-    isLoading: assignmentLoading,
-    isError: assignmentError,
-    error: assignmentFetchError,
-  } = useGetAssignments(userId);
+  const { data: assignmentsData } = useGetAssignmentsByUser(userId);
 
   const {
     data: myPostData,
@@ -26,7 +21,7 @@ export const useUserActivityData = (userId: string) => {
   } = useGetLectureComments(userId);
 
   // 내가 제출한 과제
-  const filteredAssignments = assignmentData?.map(assignment => ({
+  const filteredAssignments = assignmentsData?.submitted.map(assignment => ({
     id: assignment.id,
     title: assignment.AssignmentData?.title,
     content: assignment.content,
@@ -89,7 +84,6 @@ export const useUserActivityData = (userId: string) => {
     progressData,
     lectureCommentLoading,
     myPostLoading,
-    assignmentLoading,
     progressLoading,
   };
 };
