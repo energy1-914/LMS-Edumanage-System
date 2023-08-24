@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import LoadingSpinner from "@/components/Loading/LoadingSpinner";
 import ModalWrapper from "@/components/ModalWrapper";
-import Category from "./Category";
+import Category from "../Category";
 import AssignmentsDetailModal from "./AssignmentsDetailModal";
 import PostDetailModal from "./PostDetailModal";
 import CommentsDetailModal from "./CommentsDetailModal";
 import { useUserActivityData } from "@/hooks/common/useUserActivityData";
+import { useAppSelector } from "@/redux/store";
 
 export default function UserActivityList() {
   const [isAssignmentsModalOpen, setIsAssignmentsModalOpen] = useState(false);
@@ -45,25 +45,13 @@ export default function UserActivityList() {
     setIsCommentsDetailModalOpen(true);
     setSelectedCommentId(() => id);
   };
-
+  const userId = useAppSelector(state => state.userInfo.id);
   const {
     filteredAssignments,
     filteredPosts,
     comments,
-    lectureCommentLoading,
-    myPostLoading,
-    assignmentLoading,
-  } = useUserActivityData();
+  } = useUserActivityData(userId);
 
-  if (lectureCommentLoading) {
-    return <LoadingSpinner />;
-  }
-  if (myPostLoading) {
-    return <LoadingSpinner />;
-  }
-  if (assignmentLoading) {
-    return <LoadingSpinner />;
-  }
   return (
     <>
       <div className="flex gap-4 mt-10">
