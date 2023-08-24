@@ -1,10 +1,9 @@
-import { useAppSelector } from "@/redux/store";
 import useGetMyPosts from "@/hooks/reactQuery/mypage/useGetMyPosts";
 import useGetAssignments from "@/hooks/reactQuery/mypage/useGetAssignments";
 import useGetLectureComments from "@/hooks/reactQuery/mypage/useGetLectureComments";
+import useGetProgressInfoQuery from "@/hooks/reactQuery/mypage/useGetProgressQuery";
 
-export const useUserActivityData = () => {
-  const userId = useAppSelector(state => state.userInfo.id);
+export const useUserActivityData = (userId: string) => {
   const {
     data: assignmentData,
     isLoading: assignmentLoading,
@@ -75,12 +74,22 @@ export const useUserActivityData = () => {
     ...(filteredLectureComments || []),
   ].sort((a, b) => a.createdAt - b.createdAt);
 
+  //강의 수강 정보
+  const {
+    data: progressData,
+    isLoading: progressLoading,
+    isError: progressError,
+    error: progressFetchError,
+  } = useGetProgressInfoQuery(userId);
+
   return {
     filteredAssignments,
     filteredPosts,
     comments,
+    progressData,
     lectureCommentLoading,
     myPostLoading,
     assignmentLoading,
+    progressLoading,
   };
 };
