@@ -2,7 +2,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { useMutation } from "@tanstack/react-query";
 import { auth } from "@/utils/firebase";
 import { useRouter } from "next/navigation";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/common/useToast";
 
 interface FormValue {
   email: string;

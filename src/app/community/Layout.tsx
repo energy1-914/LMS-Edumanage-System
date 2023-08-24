@@ -7,7 +7,7 @@ import CommunityList from "./(components)/Community/CommunityList";
 import CommunityModal from "./(components)/CommunityModal/CommunityModal";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { notChoicePost } from "@redux/postSlice";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/common/useToast";
 import { Toast } from "sfac-designkit-react";
 
 export default function Layout() {

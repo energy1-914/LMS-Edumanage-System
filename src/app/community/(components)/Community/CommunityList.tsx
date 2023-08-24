@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import CommunityCard from "./CommunityCard";
 import Aside from "./Aside/Aside";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/common/useToast";
 import useGetSelectedCategory from "@/hooks/reactQuery/community/useGetSelectedCategory";
 import { Toast } from "sfac-designkit-react";
 
