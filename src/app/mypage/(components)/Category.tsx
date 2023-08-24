@@ -1,6 +1,5 @@
 "use client";
-import Image from "next/image";
-import arrow from "/public/images/MypageArrow.svg";
+
 import { Timestamp } from "firebase/firestore";
 
 type CommentData = {
@@ -32,23 +31,11 @@ export default function Category({
   return (
     <div
       className={`flex flex-col ${width ? width : "w-1/3"} ${
-        title ? "" : "grid grid-cols-2	gap-2"
+        title ? "" : "grid grid-cols-2 gap-2"
       }`}
       onClick={handleClick}
     >
-      {title && (
-        <div className="flex justify-between">
-          <h3 className="font-bold ">{title}</h3>
-          <Image
-            src={arrow}
-            width={10}
-            height={14}
-            alt="더보기 버튼"
-            className=" cursor-pointer"
-          />
-        </div>
-      )}
-
+      {title && <h3 className="font-bold ">{title}</h3>}
       {myData && myData.length ? (
         myData.map(({ id, title, category, content, attachmentFiles }) => (
           <div
