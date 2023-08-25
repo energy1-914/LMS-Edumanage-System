@@ -10,10 +10,19 @@ import PieCharts from "./PieCharts";
 
 const Dashboard = () => {
   const userId = useAppSelector(state => state.userInfo.id);
-  const { lectureCommentLoading, myPostLoading, progressLoading } =
-    useUserActivityData(userId);
+  const {
+    assignmentsLoading,
+    lectureCommentLoading,
+    myPostLoading,
+    progressLoading,
+  } = useUserActivityData(userId);
 
-  if (lectureCommentLoading || myPostLoading || progressLoading) {
+  if (
+    assignmentsLoading ||
+    lectureCommentLoading ||
+    myPostLoading ||
+    progressLoading
+  ) {
     return <LoadingSpinner />;
   }
 

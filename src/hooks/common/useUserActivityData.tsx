@@ -4,7 +4,8 @@ import useGetProgressInfoQuery from "@/hooks/reactQuery/mypage/useGetProgressQue
 import { useGetAssignmentsByUser } from "@/hooks/reactQuery/mypage/useGetAssignmentsByUser";
 
 export const useUserActivityData = (userId: string) => {
-  const { data: assignmentsData } = useGetAssignmentsByUser(userId);
+  const { data: assignmentsData, isLoading: assignmentsLoading } =
+    useGetAssignmentsByUser(userId);
 
   const {
     data: myPostData,
@@ -83,6 +84,7 @@ export const useUserActivityData = (userId: string) => {
     filteredPosts,
     comments,
     progressData,
+    assignmentsLoading,
     lectureCommentLoading,
     myPostLoading,
     progressLoading,
