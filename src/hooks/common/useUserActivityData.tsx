@@ -78,6 +78,7 @@ export const useUserActivityData = (userId: string) => {
   } = useGetProgressInfoQuery(userId);
 
   return {
+    assignmentsData,
     filteredAssignments,
     filteredPosts,
     comments,
