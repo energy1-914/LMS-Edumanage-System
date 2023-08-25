@@ -27,8 +27,7 @@ const PieChart = ({
 
   useEffect(() => {
     const svg = d3.select(svgRef.current);
-    const radius = Math.min(SVG_WIDTH, SVG_HEIGHT) / 2;
-
+    const radius = SVG_WIDTH / 2;
     const color = d3.scaleOrdinal(COLORS);
     const pie = d3.pie().sort(null);
     const arc = d3
@@ -64,38 +63,46 @@ const PieChart = ({
       .style("font-size", "0.8rem")
       .style("color", "#555");
 
+    const handleMouseOver = (d: PieArcDatum<number>, i: { index: number }) => {
+      if (i.index === 0) {
+        tooltip.text(`${hoverText}: ${percentage}%`);
+      } else {
+        tooltip.text(`미${hoverText}:  ${100 - percentage}%`);
+      }
+      tooltip
+        .style("border-color", color(`${i.index}`))
+        .style("visibility", "visible");
+    };
+
+    const handleMouseMove = (event: MouseEvent) => {
+      tooltip
+        .style("top", event.pageY - 10 + "px")
+        .style("left", event.pageX + 10 + "px");
+    };
+
+    const handleMouseOut = () => {
+      tooltip.style("visibility", "hidden");
+    };
+
+    const arcTween = (d: PieArcDatum<number | { valueOf(): number }>) => {
+      const interp = d3.interpolate(d.startAngle, d.endAngle);
+      return (t: number) => {
+        d.endAngle = interp(t);
+        return arc(d as PieArcDatum<number>) || "";
+      };
+    };
+
     arcs
-      .append("path")
+      .append("path") 
       .attr("fill", (d, i) => color(`${i}`))
       .attr("d", d => arc(d as PieArcDatum<number>) || "")
-      .on("mouseover", function (d, i) {
-        if (i.index === 0) {
-          tooltip.text(`${hoverText}: ${percentage}%`);
-        } else {
-          tooltip.text(`미${hoverText}:  ${100 - percentage}%`);
-        }
-        tooltip
-          .style("border-color", color(`${i.index}`))
-          .style("visibility", "visible");
-      })
-      .on("mousemove", function (event) {
-        tooltip
-          .style("top", event.pageY - 10 + "px")
-          .style("left", event.pageX + 10 + "px");
-      })
-      .on("mouseout", function () {
-        tooltip.style("visibility", "hidden");
-      })
+      .on("mouseover", handleMouseOver)
+      .on("mousemove", handleMouseMove)
+      .on("mouseout", handleMouseOut)
       .transition()
-      .delay((d, i) => i * 500)
-      .duration(500)
-      .attrTween("d", function (d) {
-        const interp = d3.interpolate(d.startAngle, d.endAngle);
-        return function (t) {
-          d.endAngle = interp(t);
-          return arc(d as PieArcDatum<number>) || "";
-        };
-      });
+      .delay((d, i) => i * 500) 
+      .duration(700)
+      .attrTween("d", arcTween);
 
     return () => {
       tooltip.remove();
@@ -107,9 +114,9 @@ const PieChart = ({
       <h3 className="text-lg font-bold">{title}</h3>
       <div
         ref={containerRef}
-        className="h-full flex justify-center items-center gap-6 border-solid border border-gray-200 rounded-[10px] px-3 py-4 my-3 cursor-pointer"
+        className="h-full flex justify-center items-center gap-6 border-solid border border-gray-200 rounded-[10px] px-3 py-4 my-3"
       >
-        <svg ref={svgRef} />
+        <svg ref={svgRef} className="cursor-pointer" />
         <small>
           {subtitle} ({percentage}%)
         </small>
