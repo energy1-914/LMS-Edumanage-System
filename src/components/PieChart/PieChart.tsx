@@ -95,7 +95,13 @@ const PieChart = ({
     arcs
       .append("path") 
       .attr("fill", (d, i) => color(`${i}`))
-      .attr("d", d => arc(d as PieArcDatum<number>) || "")
+      .attr("d", d => {
+        const tempEnd = d.endAngle;
+        d.endAngle = d.startAngle;
+        const pathData = arc(d as PieArcDatum<number>) || "";
+        d.endAngle = tempEnd;
+        return pathData;
+      })
       .on("mouseover", handleMouseOver)
       .on("mousemove", handleMouseMove)
       .on("mouseout", handleMouseOut)
