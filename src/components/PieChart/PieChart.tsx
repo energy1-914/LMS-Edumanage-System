@@ -93,7 +93,7 @@ const PieChart = ({
     };
 
     arcs
-      .append("path") 
+      .append("path")
       .attr("fill", (d, i) => color(`${i}`))
       .attr("d", d => {
         const tempEnd = d.endAngle;
@@ -106,7 +106,7 @@ const PieChart = ({
       .on("mousemove", handleMouseMove)
       .on("mouseout", handleMouseOut)
       .transition()
-      .delay((d, i) => i * 500) 
+      .delay((d, i) => i * 500)
       .duration(700)
       .attrTween("d", arcTween);
 
