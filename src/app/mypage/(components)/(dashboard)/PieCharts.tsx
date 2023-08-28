@@ -12,7 +12,7 @@ const PieCharts = () => {
   const submittedCount = assignmentsData?.submitted.length || 0;
 
   return (
-    <>
+    <div className="grid grid-cols-2 gap-y-7 gap-x-3">
       <PieChart
         compeletedTasks={submittedCount}
         totalTasks={unsubmittedCount + submittedCount}
@@ -27,7 +27,7 @@ const PieCharts = () => {
         subtitle="수강률"
         hoverText="완료"
       />
-    </>
+    </div>
   );
 };
 export default PieCharts;

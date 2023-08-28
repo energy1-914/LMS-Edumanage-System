@@ -28,11 +28,11 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-y-7 gap-x-3">
+      <div className="flex gap-y-7 gap-x-3">
         <UserActivityGraph />
         <UserActivityCounters />
-        <PieCharts />
       </div>
+      <PieCharts />
       <UserActivityList />
     </>
   );
