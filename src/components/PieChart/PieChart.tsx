@@ -108,7 +108,8 @@ const PieChart = ({
       .transition()
       .delay((d, i) => i * 500)
       .duration(700)
-      .attrTween("d", arcTween);
+      .attrTween("d", arcTween)
+      .style("cursor", "pointer");
 
     return () => {
       tooltip.remove();
@@ -122,7 +123,7 @@ const PieChart = ({
         ref={containerRef}
         className="h-full flex justify-center items-center gap-6 border-solid border border-gray-200 rounded-[10px] px-3 py-4 my-3"
       >
-        <svg ref={svgRef} className="cursor-pointer" />
+        <svg ref={svgRef} />
         <small>
           {subtitle} ({percentage}%)
         </small>
