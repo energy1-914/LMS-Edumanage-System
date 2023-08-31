@@ -33,8 +33,8 @@ const UserActivityGraph = () => {
     }))
     .sort(
       (a, b) =>
-        timeParse("%m-%d")(a.date).getTime() -
-        timeParse("%m-%d")(b.date).getTime(),
+        (timeParse("%m-%d")(a.date)?.getTime() || 0) -
+        (timeParse("%m-%d")(b.date)?.getTime() || 0),
     );
 
   const ref = useRef(null);
@@ -58,7 +58,7 @@ const UserActivityGraph = () => {
     const startDate = new Date();
     startDate.setDate(endDate.getDate() - 6);
     startDate.setHours(0, 0, 0, 0);
-    
+
     const sevenDaysData = [];
     let tempDate = new Date(startDate);
 
@@ -133,7 +133,7 @@ const UserActivityGraph = () => {
 
     const yAxisGrid = axisLeft(y)
       .tickSize(-innerWidth)
-      .tickFormat("")
+      .tickFormat(()=>"")
       .ticks(maxValue);
 
     svg
