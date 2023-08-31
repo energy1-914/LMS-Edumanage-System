@@ -11,6 +11,7 @@ import {
   timeParse,
   timeFormat,
   max,
+  area,
 } from "d3";
 import { curveMonotoneX } from "d3-shape";
 import { useUserActivityData } from "@/hooks/common/useUserActivityData";
@@ -97,7 +98,7 @@ const UserActivityGraph = () => {
       .ticks(5)
       .tickPadding(10) // 원하는 눈금 갯수 설정
       .tickFormat(d => `${d}`);
-      
+
     const yAxisGroup = svg
       .append("g")
       .attr("transform", `translate(${margin.left},0)`)
@@ -130,6 +131,44 @@ const UserActivityGraph = () => {
       .y(d => y(d.value))
       .curve(curveMonotoneX);
 
+    //그라데이션
+    const defs = svg.append("defs");
+
+    const areaPath = area<Datum>()
+      .x(d => getDateXCoordinate(d.date))
+      .y0(innerHeight) // 아랫부분의 시작점 (x축 바닥)
+      .y1(d => y(d.value))
+      .curve(curveMonotoneX);
+
+    const gradient = defs
+      .append("linearGradient")
+      .attr("id", "activityGradient")
+      .attr("x1", "100%")
+      .attr("y1", "0%")
+      .attr("x2", "0%")
+      .attr("y2", "0%");
+
+    gradient
+      .append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", "#0059ff")
+      .attr("stop-opacity", 0.5);
+
+    gradient
+      .append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", "#0059ff")
+      .attr("stop-opacity", 0);
+
+    //그라데이션 그리기
+    svg
+      .append("path")
+      .data([sevenDaysData])
+      .attr("d", areaPath)
+      .attr("fill", "url(#activityGradient)")
+      .attr("transform", `translate(${margin.left},0)`);
+
+    //선그리기
     svg
       .append("path")
       .data([sevenDaysData])
@@ -137,7 +176,7 @@ const UserActivityGraph = () => {
       .attr("d", myLine)
       .attr("fill", "none")
       .attr("stroke", "#0059ff")
-      .attr("transform", `translate(${margin.left},0)`);
+      .attr("transform", `translate(${margin.left},0)`)
 
     const xAxisGroup = svg
       .append("g")
@@ -146,7 +185,8 @@ const UserActivityGraph = () => {
 
     xAxisGroup.select(".domain").remove();
     xAxisGroup.selectAll("text").attr("font-size", "13px");
-
+    
+    //원그리기
     svg
       .selectAll(".dot")
       .data(sevenDaysData)
