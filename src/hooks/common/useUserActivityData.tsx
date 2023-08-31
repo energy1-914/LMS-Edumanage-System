@@ -2,6 +2,7 @@ import useGetMyPosts from "@/hooks/reactQuery/mypage/useGetMyPosts";
 import useGetLectureComments from "@/hooks/reactQuery/mypage/useGetLectureComments";
 import useGetProgressInfoQuery from "@/hooks/reactQuery/mypage/useGetProgressQuery";
 import { useGetAssignmentsByUser } from "@/hooks/reactQuery/mypage/useGetAssignmentsByUser";
+import timestampToDate from "@/utils/timestampToDate";
 
 export const useUserActivityData = (userId: string) => {
   const { data: assignmentsData, isLoading: assignmentsLoading } =
@@ -70,6 +71,22 @@ export const useUserActivityData = (userId: string) => {
     ...(filteredLectureComments || []),
   ].sort((a, b) => a.createdAt - b.createdAt);
 
+  const allActivities = [
+    ...(filteredAssignments || []),
+    ...(filteredPosts || []),
+    ...(comments || []),
+  ];
+
+  const activityCountsByDate = allActivities.reduce(
+    (acc, activity) => {
+      let date = timestampToDate(activity.createdAt);
+      date = date.split(".")[1] + "-" + date.split(".")[2];
+      acc[date] = (acc[date] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
   //강의 수강 정보
   const {
     data: progressData,
@@ -84,6 +101,7 @@ export const useUserActivityData = (userId: string) => {
     filteredPosts,
     comments,
     progressData,
+    activityCountsByDate,
     assignmentsLoading,
     lectureCommentLoading,
     myPostLoading,
