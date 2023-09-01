@@ -21,6 +21,7 @@ import { curveMonotoneX } from "d3-shape";
 import { bisector } from "d3-array";
 import { useUserActivityData } from "@/hooks/common/useUserActivityData";
 import { useAppSelector } from "@/redux/store";
+import InformationTooltip from "./InformationTooltip";
 
 type Datum = {
   date: string;
@@ -318,23 +319,12 @@ const UserActivityGraph = () => {
           onMouseEnter={handleIconMouseEnter}
           onMouseLeave={handleIconMouseLeave}
         />
-        {showTooltip && (
-          <div
-            onMouseEnter={() => setShowTooltip(true)}
-            onMouseLeave={handleIconMouseLeave}
-            className="absolute bg-white p-2 border border-black rounded-md text-[#555] text-sm "
-            style={{
-              top: `${tooltipPos.y}px`,
-              left: `${tooltipPos.x}px`,
-            }}
-          >
-            활동지수란 ?
-            <br />
-            날짜별 사용자가 게시한 게시글, 댓글, 제출한 과제를
-            <br />
-            합산한 결과입니다.
-          </div>
-        )}
+        <InformationTooltip
+          showTooltip={showTooltip}
+          setShowTooltip={setShowTooltip}
+          handleIconMouseLeave={handleIconMouseLeave}
+          position={tooltipPos}
+        />
         <svg width="90%" height="90%" viewBox="0 0 600 350" ref={ref}></svg>
       </div>
     </div>
