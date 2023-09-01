@@ -29,7 +29,7 @@ export const useUserActivityData = (userId: string) => {
     content: assignment.content,
     attachmentFiles: assignment.attachmentFiles,
     category: assignment.AssignmentData?.level,
-    createdAt: assignment.AssignmentData?.createdAt,
+    createdAt: assignment.createdAt,
   }));
 
   // 내가 쓴 글
