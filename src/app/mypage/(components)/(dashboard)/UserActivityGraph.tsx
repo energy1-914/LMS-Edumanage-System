@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import informationIcon from "public/images/information.png";
 
@@ -70,7 +70,22 @@ const UserActivityGraph = () => {
 
   const ref = useRef(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  // 정보 아이콘 툴팁
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 
+  const handleIconMouseEnter = e => {
+    setShowTooltip(true);
+    const rect = e.target.getBoundingClientRect();
+    setTooltipPos({
+      x: rect.left + window.scrollX,
+      y: rect.top + window.scrollY - 30,
+    });
+  };
+
+  const handleIconMouseLeave = () => {
+    setShowTooltip(false);
+  };
   useEffect(() => {
     const svg = select(ref.current);
     const width = containerRef.current?.offsetWidth;
@@ -156,7 +171,10 @@ const UserActivityGraph = () => {
       .style("border-radius", "5px")
       .style("pointer-events", "none")
       .style("font-size", "0.8rem")
-      .style("color", "#555");
+      .style("color", "#555")
+      .on("mouseleave", function () {
+        tooltip.transition().duration(500).style("opacity", 0);
+      });
 
     const defs = svg.append("defs");
 
@@ -287,7 +305,7 @@ const UserActivityGraph = () => {
       .on("mousemove", handleMouseMove)
       .on("mouseout", handleMouseOut);
 
-    svg.on("mouseleave", function () {
+    select(containerRef.current).on("mouseleave", function () {
       tooltip.transition().duration(500).style("opacity", 0);
     });
   }, [sevenDaysData]);
@@ -303,7 +321,26 @@ const UserActivityGraph = () => {
           src={informationIcon}
           alt="information icon"
           className="self-end w-4 h-4"
+          onMouseEnter={handleIconMouseEnter}
+          onMouseLeave={handleIconMouseLeave}
         />
+        {showTooltip && (
+          <div
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={handleIconMouseLeave}
+            className="absolute bg-white p-2 border border-black rounded-md text-[#555] text-sm "
+            style={{
+              top: `${tooltipPos.y}px`,
+              left: `${tooltipPos.x}px`,
+            }}
+          >
+            활동지수란 ?
+            <br />
+            날짜별 사용자가 게시한 게시글, 댓글, 제출한 과제를
+            <br />
+            합산한 결과입니다.
+          </div>
+        )}
         <svg width="90%" height="90%" viewBox="0 0 600 350" ref={ref}></svg>
       </div>
     </div>
