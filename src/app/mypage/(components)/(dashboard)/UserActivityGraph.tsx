@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef } from "react";
+import Image from "next/image";
+import informationIcon from "public/images/information.png";
+
 import {
   select,
   scaleTime,
@@ -12,8 +15,11 @@ import {
   timeFormat,
   max,
   area,
+  pointer,
+  utcParse,
 } from "d3";
 import { curveMonotoneX } from "d3-shape";
+import { bisector } from "d3-array";
 import { useUserActivityData } from "@/hooks/common/useUserActivityData";
 import { useAppSelector } from "@/redux/store";
 
@@ -214,6 +220,57 @@ const UserActivityGraph = () => {
       .attr("stroke", "#0059ff")
       .attr("stroke-width", 2);
 
+    const handleMouseOver = (_: any, d: Datum) => {
+      const i = sevenDaysData.findIndex(
+        item => item.date === d.date && item.value === d.value,
+      );
+      tooltip.transition().duration(200).style("opacity", 1);
+      select(dots.nodes()[i]).attr("r", 8);
+    };
+
+    const handleMouseMove = (event: React.MouseEvent) => {
+      const [mouseX] = pointer(event);
+      const parsedUtcDate = utcParse("%Y-%m-%d");
+
+      const bisectDate = bisector(
+        (d: Datum) => parsedUtcDate(`${currentYear}-${d.date}`)!,
+      ).left;
+      const x0 = x.invert(mouseX - margin.left); // 마우스의 위치를 도메인 값으로 변환
+      const i = bisectDate(sevenDaysData, x0, 1);
+      const d0 = sevenDaysData[i - 1];
+      const d1 = sevenDaysData[i];
+      const d0Date = timeParse("%m-%d")(d0.date);
+      const d1Date = d1 ? timeParse("%m-%d")(d1.date) : null;
+      let d: Datum;
+      if (d0Date && d1Date) {
+        d =
+          x0.getTime() - d0Date.getTime() > d1Date.getTime() - x0.getTime()
+            ? d1
+            : d0;
+      } else {
+        d = d0;
+      }
+
+      tooltip
+        .html(`활동지수: ${d.value}개`)
+        .style("left", `${event.pageX + 5}px`)
+        .style("top", `${event.pageY - 28}px`);
+
+      select(event.currentTarget)
+        .selectAll(".dot")
+        .attr("r", (dotData: any) => {
+          const data = dotData as Datum;
+          return data.date === d.date ? 8 : 5;
+        });
+    };
+
+    const handleMouseOut = (event: React.MouseEvent, d: Datum) => {
+      const i = sevenDaysData.findIndex(
+        item => item.date === d.date && item.value === d.value,
+      );
+      select(dots.nodes()[i]).attr("r", 5);
+    };
+
     //툴팁
     svg
       .selectAll(".dot-range")
@@ -224,27 +281,11 @@ const UserActivityGraph = () => {
       .attr("transform", `translate(${margin.left},0)`)
       .attr("cx", d => getDateXCoordinate(d.date))
       .attr("cy", d => y(d.value))
-      .attr("r", 25)
+      .attr("r", 90)
       .attr("opacity", 0)
-      .on("mouseover", function (event, d) {
-        const i = sevenDaysData.findIndex(
-          item => item.date === d.date && item.value === d.value,
-        );
-        tooltip.transition().duration(200).style("opacity", 1);
-        select(dots.nodes()[i]).attr("r", 8); 
-      })
-      .on("mousemove", function (event, d) {
-        tooltip
-          .html(`활동지수: ${d.value}개`)
-          .style("left", `${event.pageX + 5}px`)
-          .style("top", `${event.pageY - 28}px`);
-      })
-      .on("mouseout", function (event, d) {
-        const i = sevenDaysData.findIndex(
-          item => item.date === d.date && item.value === d.value,
-        );
-        select(dots.nodes()[i]).attr("r", 5); 
-      });
+      .on("mouseover", handleMouseOver)
+      .on("mousemove", handleMouseMove)
+      .on("mouseout", handleMouseOut);
 
     svg.on("mouseleave", function () {
       tooltip.transition().duration(500).style("opacity", 0);
@@ -256,8 +297,13 @@ const UserActivityGraph = () => {
       <h3 className="text-lg font-bold">전체</h3>
       <div
         ref={containerRef}
-        className="w-[600px] h-[350px] text-base border-solid border border-gray-200 rounded-[10px] px-3 py-4 my-3"
+        className="flex flex-col gap-2 w-[600px] h-[350px] text-base border-solid border border-gray-200 rounded-[10px] px-3 py-4 my-3"
       >
+        <Image
+          src={informationIcon}
+          alt="information icon"
+          className="self-end w-4 h-4"
+        />
         <svg width="90%" height="90%" viewBox="0 0 600 350" ref={ref}></svg>
       </div>
     </div>
