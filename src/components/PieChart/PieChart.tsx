@@ -58,7 +58,7 @@ const PieChart = ({
       .style("visibility", "hidden")
       .style("background-color", "white")
       .style("padding", "8px")
-      .style("border", "1px solid black")
+      .style("border", "1.5px solid black")
       .style("border-radius", "5px")
       .style("font-size", "0.8rem")
       .style("color", "#555");
