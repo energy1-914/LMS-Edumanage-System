@@ -93,6 +93,14 @@ const UserActivityGraph = () => {
       })
       .tickPadding(10);
 
+    const xAxisGroup = svg
+      .append("g")
+      .attr("transform", `translate(${margin.left},${innerHeight})`)
+      .call(xAxis);
+
+    xAxisGroup.select(".domain").remove();
+    xAxisGroup.selectAll("text").attr("font-size", "13px");
+
     const yAxis = axisLeft(y)
       .tickSize(0) // y축 눈금의 길이를 0으로 설정
       .ticks(5)
@@ -118,7 +126,7 @@ const UserActivityGraph = () => {
       .call(yAxisGrid)
       .attr("transform", `translate(${margin.left},0)`)
       .selectAll(".tick line")
-      .attr("stroke", "#e5e5e5");
+      .attr("stroke", "#d4d2d2");
 
     const getDateXCoordinate = (dateString: string) => {
       const dateWithYear = `${currentYear}-${dateString}`;
@@ -131,7 +139,19 @@ const UserActivityGraph = () => {
       .y(d => y(d.value))
       .curve(curveMonotoneX);
 
-    //그라데이션
+    const tooltip = select("body")
+      .append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0)
+      .style("position", "absolute")
+      .style("background-color", "white")
+      .style("padding", "5px")
+      .style("border", "1.5px solid #0059ff")
+      .style("border-radius", "5px")
+      .style("pointer-events", "none")
+      .style("font-size", "0.8rem")
+      .style("color", "#555");
+
     const defs = svg.append("defs");
 
     const areaPath = area<Datum>()
@@ -160,7 +180,7 @@ const UserActivityGraph = () => {
       .attr("stop-color", "#0059ff")
       .attr("stop-opacity", 0);
 
-    //그라데이션 그리기
+    //그라데이션
     svg
       .append("path")
       .data([sevenDaysData])
@@ -177,17 +197,10 @@ const UserActivityGraph = () => {
       .attr("fill", "none")
       .attr("stroke", "#0059ff")
       .attr("transform", `translate(${margin.left},0)`)
+      .attr("stroke-width", 2);
 
-    const xAxisGroup = svg
-      .append("g")
-      .attr("transform", `translate(${margin.left},${innerHeight})`)
-      .call(xAxis);
-
-    xAxisGroup.select(".domain").remove();
-    xAxisGroup.selectAll("text").attr("font-size", "13px");
-    
     //원그리기
-    svg
+    const dots = svg
       .selectAll(".dot")
       .data(sevenDaysData)
       .enter()
@@ -196,10 +209,46 @@ const UserActivityGraph = () => {
       .attr("transform", `translate(${margin.left},0)`)
       .attr("cx", d => getDateXCoordinate(d.date))
       .attr("cy", d => y(d.value))
-      .attr("r", 5) 
-      .attr("fill", "white") 
+      .attr("r", 5)
+      .attr("fill", "white")
       .attr("stroke", "#0059ff")
       .attr("stroke-width", 2);
+
+    //툴팁
+    svg
+      .selectAll(".dot-range")
+      .data(sevenDaysData)
+      .enter()
+      .append("circle")
+      .attr("class", "dot-range")
+      .attr("transform", `translate(${margin.left},0)`)
+      .attr("cx", d => getDateXCoordinate(d.date))
+      .attr("cy", d => y(d.value))
+      .attr("r", 25)
+      .attr("opacity", 0)
+      .on("mouseover", function (event, d) {
+        const i = sevenDaysData.findIndex(
+          item => item.date === d.date && item.value === d.value,
+        );
+        tooltip.transition().duration(200).style("opacity", 1);
+        select(dots.nodes()[i]).attr("r", 8); 
+      })
+      .on("mousemove", function (event, d) {
+        tooltip
+          .html(`활동지수: ${d.value}개`)
+          .style("left", `${event.pageX + 5}px`)
+          .style("top", `${event.pageY - 28}px`);
+      })
+      .on("mouseout", function (event, d) {
+        const i = sevenDaysData.findIndex(
+          item => item.date === d.date && item.value === d.value,
+        );
+        select(dots.nodes()[i]).attr("r", 5); 
+      });
+
+    svg.on("mouseleave", function () {
+      tooltip.transition().duration(500).style("opacity", 0);
+    });
   }, [sevenDaysData]);
 
   return (
