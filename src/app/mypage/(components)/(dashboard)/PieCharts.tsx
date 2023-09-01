@@ -12,7 +12,7 @@ const PieCharts = () => {
   const submittedCount = assignmentsData?.submitted.length || 0;
 
   return (
-    <div className="grid grid-cols-2 gap-y-7 gap-x-3">
+    <div className="flex gap-3 mb-4">
       <PieChart
         compeletedTasks={submittedCount}
         totalTasks={unsubmittedCount + submittedCount}

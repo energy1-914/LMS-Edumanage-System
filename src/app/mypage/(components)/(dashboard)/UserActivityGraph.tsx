@@ -314,7 +314,7 @@ const UserActivityGraph = () => {
       <h3 className="text-lg font-bold">전체</h3>
       <div
         ref={containerRef}
-        className="flex flex-col gap-2 w-[600px] h-[350px] text-base border-solid border border-gray-200 rounded-[10px] px-3 py-4 my-3"
+        className="flex flex-col gap-2 w-[550px] text-base border-solid border border-gray-200 rounded-[10px] px-3 py-4 my-3"
       >
         <Image
           src={informationIcon}

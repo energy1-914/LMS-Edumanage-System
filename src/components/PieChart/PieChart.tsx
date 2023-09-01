@@ -117,7 +117,7 @@ const PieChart = ({
   }, [percentage]);
 
   return (
-    <div>
+    <div className="w-full">
       <h3 className="text-lg font-bold">{title}</h3>
       <div
         ref={containerRef}

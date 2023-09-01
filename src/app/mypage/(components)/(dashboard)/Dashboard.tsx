@@ -27,14 +27,14 @@ const Dashboard = () => {
   }
 
   return (
-    <>
-      <div className="flex gap-y-7 gap-x-3">
+    <div className="flex flex-col gap-5">
+      <div className="flex gap-3">
         <UserActivityGraph />
         <UserActivityCounters />
       </div>
       <PieCharts />
       <UserActivityList />
-    </>
+    </div>
   );
 };
 

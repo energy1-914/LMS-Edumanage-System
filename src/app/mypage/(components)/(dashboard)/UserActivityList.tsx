@@ -51,7 +51,7 @@ export default function UserActivityList() {
 
   return (
     <>
-      <div className="flex gap-4 mt-10">
+      <div className="flex gap-x-4 mt-12">
         <Category
           title="제출한 과제"
           targetData={filteredAssignments}
