@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import informationIcon from "public/images/information.png";
-
 import {
   select,
   scaleTime,
@@ -76,7 +75,7 @@ const UserActivityGraph = () => {
 
   const handleIconMouseEnter = (e: React.MouseEvent<HTMLImageElement>) => {
     setShowTooltip(true);
-    const rect = e.currentTarget .getBoundingClientRect();
+    const rect = e.currentTarget.getBoundingClientRect();
     setTooltipPos({
       x: rect.left + window.scrollX,
       y: rect.top + window.scrollY - 30,
@@ -171,10 +170,7 @@ const UserActivityGraph = () => {
       .style("border-radius", "5px")
       .style("pointer-events", "none")
       .style("font-size", "0.8rem")
-      .style("color", "#555")
-      .on("mouseleave", function () {
-        tooltip.transition().duration(500).style("opacity", 0);
-      });
+      .style("color", "#555");
 
     const defs = svg.append("defs");
 
@@ -187,16 +183,16 @@ const UserActivityGraph = () => {
     const gradient = defs
       .append("linearGradient")
       .attr("id", "activityGradient")
-      .attr("x1", "100%")
+      .attr("x1", "0%")
       .attr("y1", "0%")
       .attr("x2", "0%")
-      .attr("y2", "0%");
+      .attr("y2", "100%");
 
     gradient
       .append("stop")
       .attr("offset", "0%")
       .attr("stop-color", "#0059ff")
-      .attr("stop-opacity", 0.5);
+      .attr("stop-opacity", 0.2);
 
     gradient
       .append("stop")
@@ -210,7 +206,8 @@ const UserActivityGraph = () => {
       .data([sevenDaysData])
       .attr("d", areaPath)
       .attr("fill", "url(#activityGradient)")
-      .attr("transform", `translate(${margin.left},0)`);
+      .attr("transform", `translate(${margin.left},0)`)
+      .style("pointer-events", "none");
 
     //선그리기
     svg
@@ -221,7 +218,7 @@ const UserActivityGraph = () => {
       .attr("fill", "none")
       .attr("stroke", "#0059ff")
       .attr("transform", `translate(${margin.left},0)`)
-      .attr("stroke-width", 2);
+      .attr("stroke-width", 2.5);
 
     //원그리기
     const dots = svg
@@ -234,8 +231,8 @@ const UserActivityGraph = () => {
       .attr("cx", d => getDateXCoordinate(d.date))
       .attr("cy", d => y(d.value))
       .attr("r", 5)
-      .attr("fill", "white")
-      .attr("stroke", "#0059ff")
+      .attr("fill", "#0059ff")
+      .attr("stroke", "white")
       .attr("stroke-width", 2);
 
     const handleMouseOver = (_: any, d: Datum) => {
@@ -249,7 +246,6 @@ const UserActivityGraph = () => {
     const handleMouseMove = (event: React.MouseEvent) => {
       const [mouseX] = pointer(event);
       const parsedUtcDate = utcParse("%Y-%m-%d");
-
       const bisectDate = bisector(
         (d: Datum) => parsedUtcDate(`${currentYear}-${d.date}`)!,
       ).left;
@@ -275,7 +271,7 @@ const UserActivityGraph = () => {
         .style("top", `${event.pageY - 28}px`);
 
       select(event.currentTarget)
-        .selectAll(".dot")
+        .selectAll(".dot-range")
         .attr("r", (dotData: any) => {
           const data = dotData as Datum;
           return data.date === d.date ? 8 : 5;
@@ -287,6 +283,8 @@ const UserActivityGraph = () => {
         item => item.date === d.date && item.value === d.value,
       );
       select(dots.nodes()[i]).attr("r", 5);
+
+      tooltip.transition().duration(500).style("opacity", 0);
     };
 
     //툴팁
@@ -304,10 +302,6 @@ const UserActivityGraph = () => {
       .on("mouseover", handleMouseOver)
       .on("mousemove", handleMouseMove)
       .on("mouseout", handleMouseOut);
-
-    select(containerRef.current).on("mouseleave", function () {
-      tooltip.transition().duration(500).style("opacity", 0);
-    });
   }, [sevenDaysData]);
 
   return (
