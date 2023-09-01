@@ -74,9 +74,9 @@ const UserActivityGraph = () => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 
-  const handleIconMouseEnter = e => {
+  const handleIconMouseEnter = (e: React.MouseEvent<HTMLImageElement>) => {
     setShowTooltip(true);
-    const rect = e.target.getBoundingClientRect();
+    const rect = e.currentTarget .getBoundingClientRect();
     setTooltipPos({
       x: rect.left + window.scrollX,
       y: rect.top + window.scrollY - 30,
