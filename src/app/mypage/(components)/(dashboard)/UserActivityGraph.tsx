@@ -303,6 +303,10 @@ const UserActivityGraph = () => {
       .on("mouseover", handleMouseOver)
       .on("mousemove", handleMouseMove)
       .on("mouseout", handleMouseOut);
+
+    return () => {
+      tooltip.transition().duration(500).style("opacity", 0);
+    };
   }, [sevenDaysData]);
 
   return (
