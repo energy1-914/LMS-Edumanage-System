@@ -2,6 +2,7 @@
 
 import { useUserActivityData } from "@/hooks/common/useUserActivityData";
 import { useAppSelector } from "@/redux/store";
+import { v4 as uuid } from "uuid";
 
 const UserActivityCounters = () => {
   const userId = useAppSelector(state => state.userInfo.id);
@@ -16,7 +17,7 @@ const UserActivityCounters = () => {
   return (
     <div className="w-full flex flex-col justify-center text-base border-solid border border-gray-200 rounded-[10px] p-4 mb-3 mt-10">
       {items.map(item => (
-        <div className="flex justify-between text-lg">
+        <div className="flex justify-between text-lg" key={uuid()}>
           <div>{item.text}:</div>
           <div>{item.count}</div>
         </div>
