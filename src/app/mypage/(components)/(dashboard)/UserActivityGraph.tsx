@@ -90,7 +90,7 @@ const UserActivityGraph = () => {
     const svg = select(ref.current);
     const width = containerRef.current?.offsetWidth;
     const height = containerRef.current?.offsetHeight;
-    const margin = { top: 25, right: 10, bottom: 0, left: 20 };
+    const margin = { top: 25, right: 10, bottom: 0, left: 60 };
     const innerWidth = width ? width - margin.left - margin.right : 0;
     const innerHeight = height ? height - margin.top - margin.bottom : 0;
     const x = scaleTime().range([0, innerWidth]);
@@ -133,7 +133,6 @@ const UserActivityGraph = () => {
       .attr("transform", `translate(${margin.left},0)`)
       .call(yAxis);
 
-    yAxisGroup.select(".domain").remove();
     yAxisGroup.selectAll("text").attr("font-size", "15px");
 
     const yAxisGrid = axisLeft(y) // y축 그리드 생성
@@ -149,6 +148,8 @@ const UserActivityGraph = () => {
       .selectAll(".tick line")
       .attr("stroke", "#d4d2d2");
 
+    svg.selectAll(".domain").style("stroke", "none");
+    
     const getDateXCoordinate = (dateString: string) => {
       const dateWithYear = `${currentYear}-${dateString}`;
       const parsedDate = timeParse("%Y-%m-%d")(dateWithYear);
@@ -329,7 +330,7 @@ const UserActivityGraph = () => {
           handleIconMouseLeave={handleIconMouseLeave}
           position={tooltipPos}
         />
-        <svg width="90%" height="90%" viewBox="0 0 600 350" ref={ref}></svg>
+        <svg width="90%" height="90%" viewBox="0 0 580 350" ref={ref}></svg>
       </div>
     </div>
   );
