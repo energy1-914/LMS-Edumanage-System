@@ -1,3 +1,5 @@
+"use client"
+
 type SidebarItemProps = {
   icon: string;
   category: string;
