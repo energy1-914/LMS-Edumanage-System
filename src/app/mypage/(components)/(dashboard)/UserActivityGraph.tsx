@@ -149,7 +149,7 @@ const UserActivityGraph = () => {
       .attr("stroke", "#d4d2d2");
 
     svg.selectAll(".domain").style("stroke", "none");
-    
+
     const getDateXCoordinate = (dateString: string) => {
       const dateWithYear = `${currentYear}-${dateString}`;
       const parsedDate = timeParse("%Y-%m-%d")(dateWithYear);

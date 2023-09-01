@@ -65,7 +65,6 @@ const fetchAssignmentsByUser = async (
     let content = null;
     let submittedData = null;
     let AssignmentData = null;
-    // console.log(assignmentDoc);
 
     if (assignmentDoc.submittedAssignmentId instanceof DocumentReference) {
       const lectureSnapshot = await getDoc(assignmentDoc.submittedAssignmentId);
