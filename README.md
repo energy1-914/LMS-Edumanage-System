@@ -15,10 +15,9 @@
 
 **테스트 계정**
 
-|  |   |
-|------|---|
-| ID  | dlawldnjs5@daum.net |
-| PW  | 123456              |
+| ID                  | PW     |
+| ------------------- | ------ |
+| dlawldnjs5@daum.net | 123456 |
 
 <br/>
 <br/>
@@ -45,8 +44,7 @@
 <br/>
 호버 시 수강률을 나타내는 툴팁을 추가했습니다.
 
-<img src="https://github.com/energy1-914/LMS-Edumanage-System/assets/108319907/7768d4ca-aa27-4465-9bc5-93354e489480
-" />
+<img src="https://github.com/energy1-914/LMS-Edumanage-System/assets/108319907/7768d4ca-aa27-4465-9bc5-93354e489480" />
 
 <br/>
 <br/>
