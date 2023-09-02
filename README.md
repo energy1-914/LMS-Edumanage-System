@@ -30,12 +30,12 @@
 
 ## 대시보드 기능 추가
 
-프로젝트 종료 후 개인적으로 마이페이지에 대시보드 기능을 추가하는 마이그레이션을 진행했습니다.
+프로젝트 종료 후 개인적으로 마이페이지에 수강생의 대시보드 기능을 추가하는 마이그레이션을 진행했습니다.
 <br/>
 데이터 시각화라이브러리는 D3.js 를 사용했습니다.
 <br/>
 
-<img src="https://github.com/energy1-914/LMS-Edumanage-System/assets/108319907/7c70a223-707f-41d1-9a21-8bf5f40bd985" />
+<img src="https://github.com/energy1-914/LMS-Edumanage-System/assets/108319907/c1fddf21-e917-4d51-85de-943b439619fd" />
 <br/>
 최근 7일간의 활동지수를 나타내는 라인차트를 구현했습니다.
 <br/>
@@ -48,7 +48,7 @@
 <br/>
 호버 시 수강률을 나타내는 툴팁을 추가했습니다.
 
-<img src="https://github.com/energy1-914/LMS-Edumanage-System/assets/108319907/d9e17c9b-627e-41b4-babc-1513568eabe6
+<img src="https://github.com/energy1-914/LMS-Edumanage-System/assets/108319907/7768d4ca-aa27-4465-9bc5-93354e489480
 " />
 <br/>
 <br/>
