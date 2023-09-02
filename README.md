@@ -13,15 +13,12 @@
 
 <br/>
 
-**이메일 로그인 테스트 계정**
+**테스트 계정**
 
-|     | 관리자        | 수강생              |
-| --- | ------------- | ------------------- |
-| ID  | test@test.com | dlawldnjs5@daum.net |
-| PW  | test1234      | 123456              |
-
-<br/>
-<br/>
+|  |   |
+|------|---|
+| ID  | dlawldnjs5@daum.net |
+| PW  | 123456              |
 
 <br/>
 <br/>
@@ -50,6 +47,7 @@
 
 <img src="https://github.com/energy1-914/LMS-Edumanage-System/assets/108319907/7768d4ca-aa27-4465-9bc5-93354e489480
 " />
+
 <br/>
 <br/>
 
