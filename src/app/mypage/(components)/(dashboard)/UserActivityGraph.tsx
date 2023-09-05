@@ -18,7 +18,6 @@ import {
   utcParse,
 } from "d3";
 import { curveMonotoneX } from "d3-shape";
-import { bisector } from "d3-array";
 import { useUserActivityData } from "@/hooks/common/useUserActivityData";
 import { useAppSelector } from "@/redux/store";
 import InformationTooltip from "./InformationTooltip";
@@ -90,14 +89,12 @@ const UserActivityGraph = () => {
     const svg = select(ref.current);
     const width = containerRef.current?.offsetWidth;
     const height = containerRef.current?.offsetHeight;
-    const margin = { top: 25, right: 10, bottom: 0, left: 60 };
+    const margin = { top: 25, right: 20, bottom: 10, left: 20 };
     const innerWidth = width ? width - margin.left - margin.right : 0;
     const innerHeight = height ? height - margin.top - margin.bottom : 0;
     const x = scaleTime().range([0, innerWidth]);
     const y = scaleLinear().range([innerHeight, 0]);
-
     const maxValue = max(data, d => d.value) || 0;
-
     const currentYear = new Date().getFullYear();
 
     x.domain([startDate, endDate]);
@@ -123,9 +120,9 @@ const UserActivityGraph = () => {
     xAxisGroup.selectAll("text").attr("font-size", "13px");
 
     const yAxis = axisLeft(y)
-      .tickSize(0) // y축 눈금의 길이를 0으로 설정
+      .tickSize(0)
       .ticks(5)
-      .tickPadding(10) // 원하는 눈금 갯수 설정
+      .tickPadding(10)
       .tickFormat(d => `${d}`);
 
     const yAxisGroup = svg
@@ -247,37 +244,37 @@ const UserActivityGraph = () => {
 
     const handleMouseMove = (event: React.MouseEvent) => {
       const [mouseX] = pointer(event);
-      const parsedUtcDate = utcParse("%Y-%m-%d");
-      const bisectDate = bisector(
-        (d: Datum) => parsedUtcDate(`${currentYear}-${d.date}`)!,
-      ).left;
-      const x0 = x.invert(mouseX - margin.left); // 마우스의 위치를 도메인 값으로 변환
-      const i = bisectDate(sevenDaysData, x0, 1);
-      const d0 = sevenDaysData[i - 1];
-      const d1 = sevenDaysData[i];
-      const d0Date = timeParse("%m-%d")(d0.date);
-      const d1Date = d1 ? timeParse("%m-%d")(d1.date) : null;
-      let d: Datum;
-      if (d0Date && d1Date) {
-        d =
-          x0.getTime() - d0Date.getTime() > d1Date.getTime() - x0.getTime()
-            ? d1
-            : d0;
-      } else {
-        d = d0;
+      const x0 = x.invert(mouseX);
+      let closestDataPoint: Datum | null = null;
+ 
+      for (let i = 0; i < sevenDaysData.length - 1; i++) {
+        const date = utcParse("%Y-%m-%d")(
+          `${currentYear}-${sevenDaysData[i].date}`,
+        ) as Date;
+        const midpoint = new Date(date);
+        midpoint.setHours(12, 0, 0, 0);
+   
+        if (x0 < midpoint) {
+          closestDataPoint = sevenDaysData[i];
+          break;
+        } else {
+          closestDataPoint = sevenDaysData[i + 1];
+        }
       }
-
-      tooltip
-        .html(`활동지수: ${d.value}개`)
-        .style("left", `${event.pageX + 5}px`)
-        .style("top", `${event.pageY - 28}px`);
-
-      select(event.currentTarget)
-        .selectAll(".dot-range")
-        .attr("r", (dotData: any) => {
-          const data = dotData as Datum;
-          return data.date === d.date ? 8 : 5;
-        });
+      console.log(closestDataPoint);
+      if (closestDataPoint) {
+        tooltip
+          .html(`활동지수: ${(closestDataPoint as Datum).value}개`)
+          .style("left", `${event.pageX + 5}px`)
+          .style("top", `${event.pageY - 28}px`);
+         
+        select(event.currentTarget)
+          .selectAll(".dot-range")
+          .attr("r", (dotData: any) => {
+            const data = dotData as Datum;
+            return data.date === closestDataPoint?.date ? 8 : 5;
+          });
+      }
     };
 
     const handleMouseOut = (event: React.MouseEvent, d: Datum) => {
@@ -315,7 +312,7 @@ const UserActivityGraph = () => {
       <h3 className="text-lg font-bold">전체</h3>
       <div
         ref={containerRef}
-        className="flex flex-col gap-2 w-[550px] text-base border-solid border border-gray-200 rounded-[10px] px-3 py-4 my-3"
+        className="flex flex-col gap-2 w-[550px] h-[350px] text-base border-solid border border-gray-200 rounded-[10px] px-3 py-4 my-3"
       >
         <Image
           src={informationIcon}
@@ -330,7 +327,7 @@ const UserActivityGraph = () => {
           handleIconMouseLeave={handleIconMouseLeave}
           position={tooltipPos}
         />
-        <svg width="90%" height="90%" viewBox="0 0 580 350" ref={ref}></svg>
+        <svg viewBox="0 0 550 350" ref={ref}></svg>
       </div>
     </div>
   );
