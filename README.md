@@ -7,7 +7,7 @@
 
 <br/>
 
-[![image](https://github.com/energy1-914/LMS-Edumanage-System/assets/108319907/d1582a37-2cec-430a-a865-2b3c72110384)](https://youtu.be/mnouduHst-Y)
+[![image](./preview.png)](https://youtu.be/mnouduHst-Y)
 
 <div align="center">
 <a href="https://youtu.be/mnouduHst-Y">🚀 데모 영상 바로가기</a>
