@@ -18,7 +18,7 @@ const fetchLogin = async (data: LoginData): Promise<string> => {
   return uid;
 };
 
-export const useLoginMutation = () => {
+export const useLoginMutation = (options: any) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { toastProps, setToastProps } = useToast();
@@ -36,6 +36,7 @@ export const useLoginMutation = () => {
       }
     },
     onError: (error: FirebaseError) => {
+      options.onError();
       const errorCode = error.code;
       if (errorCode === "auth/user-not-found") {
         setToastProps({
@@ -58,5 +59,5 @@ export const useLoginMutation = () => {
       }
     },
   });
-  return { mutate, isLoading, isSuccess, toastProps };
+  return { mutate, isLoading, toastProps };
 };

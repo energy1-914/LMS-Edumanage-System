@@ -25,7 +25,11 @@ export default function LoginForm({ setIsLoginLoading }: LoginFormProps) {
   } = useForm<FormValue>();
   const emailValue = watch("email");
   const passwordValue = watch("password");
-  const { mutate, isLoading, toastProps } = useLoginMutation();
+  const { mutate, isLoading, toastProps } = useLoginMutation({
+    onError: () => {
+      setIsLoginLoading(false);
+    },
+  });
 
   return (
     <form
