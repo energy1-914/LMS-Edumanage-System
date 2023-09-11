@@ -246,14 +246,14 @@ const UserActivityGraph = () => {
       const [mouseX] = pointer(event);
       const x0 = x.invert(mouseX);
       let closestDataPoint: Datum | null = null;
- 
+
       for (let i = 0; i < sevenDaysData.length - 1; i++) {
         const date = utcParse("%Y-%m-%d")(
           `${currentYear}-${sevenDaysData[i].date}`,
         ) as Date;
         const midpoint = new Date(date);
         midpoint.setHours(12, 0, 0, 0);
-   
+
         if (x0 < midpoint) {
           closestDataPoint = sevenDaysData[i];
           break;
@@ -261,7 +261,7 @@ const UserActivityGraph = () => {
           closestDataPoint = sevenDaysData[i + 1];
         }
       }
-      console.log(closestDataPoint);
+
       if (closestDataPoint) {
         tooltip
           .html(`활동지수: ${(closestDataPoint as Datum).value}개`)
@@ -269,7 +269,7 @@ const UserActivityGraph = () => {
           .style("top", `${event.pageY - 28}px`);
 
         select("svg")
-          .selectAll(".dot-range")
+          .selectAll(".dot")
           .attr("r", (dotData: any) => {
             const data = dotData as Datum;
             return data.date === closestDataPoint?.date ? 8 : 5;
