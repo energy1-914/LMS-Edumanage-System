@@ -267,8 +267,8 @@ const UserActivityGraph = () => {
           .html(`활동지수: ${(closestDataPoint as Datum).value}개`)
           .style("left", `${event.pageX + 5}px`)
           .style("top", `${event.pageY - 28}px`);
-         
-        select(event.currentTarget)
+
+        select("svg")
           .selectAll(".dot-range")
           .attr("r", (dotData: any) => {
             const data = dotData as Datum;
@@ -304,6 +304,7 @@ const UserActivityGraph = () => {
 
     return () => {
       tooltip.transition().duration(500).style("opacity", 0);
+      svg.selectAll("*").remove();
     };
   }, [sevenDaysData]);
 
