@@ -19,7 +19,6 @@ export default function ImageModal({ props, handleModalOn }: ImageModalProps) {
     error: imageFetchError,
   } = useGetPostImage([props.replace("thumbnailImages", "postImages")]);
 
-  if (imageLoading) return <LoadingSpinner />;
 
   return (
     <>

@@ -99,16 +99,6 @@ export default function CommunityModal() {
     error: imageFetchError,
   } = useGetPostImage(imageIds);
 
-  if (
-    postLoading ||
-    nestedCommentLoading ||
-    userLoading ||
-    commentLoading ||
-    imageLoading
-  ) {
-    return <LoadingSpinner />;
-  }
-
   return (
     <div className="z-50">
       <PostCard
