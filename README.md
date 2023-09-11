@@ -9,11 +9,11 @@
 <div align="center">
 <a href="https://youtu.be/KP_MlgK8mEE" target="_blank">
   <img src="https://github.com/energy1-914/LMS-Edumanage-System/assets/108319907/03356551-39ed-4682-90a6-d8bca1f4b7ce" width="600">
+ </a>
  
  <br/>
 
 <a href="https://youtu.be/KP_MlgK8mEE">🚀 데모 영상 바로가기</a>
-</a>
 
 </div>
 
@@ -37,7 +37,6 @@
 
 # 💻 주요 기능
 
-
 ✅ 로그인 / 로그아웃 기능
 
 ✅ 커뮤니티 페이지 - 수강생간의 소통공간을 만듦으로써 "피드"형식의 인피니티스크롤 로 커뮤니티 공간을 제공
@@ -49,7 +48,6 @@
 ## 마이페이지 마이그레이션 - 대시보드 기능 추가
 
 <br/>
-
 
 프로젝트 종료 후 개인적으로 마이페이지에 수강생의 대시보드 기능을 추가하는 마이그레이션을 진행했습니다.
 <br/>
@@ -73,10 +71,8 @@
 
 <img src="https://github.com/energy1-914/LMS-Edumanage-System/assets/108319907/043d04c9-9bbc-42ad-af0d-5dcb6290bc89" />
 
-
 <br/>
 <br/>
-
 
 # 🛠️ 기술 스택
 
