@@ -9,12 +9,10 @@
 <div align="center">
 <a href="https://youtu.be/KP_MlgK8mEE" target="_blank">
   <img src="https://github.com/energy1-914/LMS-Edumanage-System/assets/108319907/03356551-39ed-4682-90a6-d8bca1f4b7ce" width="600">
- </a>
- 
+ <br/> 
  <br/>
-
-<a href="https://youtu.be/KP_MlgK8mEE">🚀 데모 영상 바로가기</a>
-
+ <a href="https://youtu.be/KP_MlgK8mEE">🚀 데모 영상 바로가기</a> 
+</a>
 </div>
 
 <br/>
